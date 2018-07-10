@@ -35,7 +35,19 @@ namespace LinphoneXamarin
             setLinphoneSettings();
 
             MainPage = new NavigationPage(new components.Login());
+            MainPage.Title = "Aeonix";
+            var settings = new ToolbarItem
+            {
+                Icon = "icon.png",
+                Command = new Command(this.ShowSettingsPage),
+            };
+            MainPage.ToolbarItems.Add(settings);
+        }
 
+        private void ShowSettingsPage()
+        {
+
+            //this.Navigation.PushAsync(new SettingsPage());
         }
 
         private void setLinphoneSettings()
@@ -47,17 +59,17 @@ namespace LinphoneXamarin
             LinphoneCore.Ring = "Resource/ring.wav";
             LinphoneCore.Ringback = "Resource/ring.wav";
             LinphoneCore.RingDuringIncomingEarlyMedia = true;
-            LinphoneCore.RemoteRingbackTone= "LinphoneXamarin.share_res.ring.wav";
-            
+            LinphoneCore.RemoteRingbackTone = "LinphoneXamarin.share_res.ring.wav";
+
             //Log.Info("omer", "" + LinphoneCore.Ringback);
             //Log.Info("omer2", "" + LinphoneCore.Ring);
 
             var assembly = typeof(App).GetTypeInfo().Assembly;
 
-          
+
         }
 
-       
+
 
         public StackLayout getLayoutView()
         {

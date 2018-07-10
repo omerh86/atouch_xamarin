@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             Title="Login"
              x:Class="LinphoneXamarin.components.Login">
     <StackLayout x:Name="stack_layout" VerticalOptions="FillAndExpand"
                  HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="15">
         <Label Text="Welcome to Linphone Xamarin!" HorizontalOptions="Center" />
         <StackLayout x:Name="stack_registrar">
-            <Entry x:Name="username" Placeholder="Username" Text="4006" />
-            <Entry x:Name="password" Placeholder="Password" IsPassword="true" Text="Touch123+" />
-            <Entry x:Name="domain" Placeholder="Domain" Text="172.28.9.88" />
+            <Entry x:Name="username" Placeholder="Username" Text="2006" />
+            <Entry x:Name="password" Placeholder="Password" IsPassword="true" Text="Aeonix123+" />
+            <Entry x:Name="domain" Placeholder="Domain" Text="172.28.11.141" />
             <Button x:Name="register" Text="Register" Clicked="OnRegisterClicked" HorizontalOptions="Center" />
             <Label x:Name="registration_status" HorizontalOptions="Center" />
         </StackLayout>
