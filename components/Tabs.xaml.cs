@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace LinphoneXamarin.components
 {
-    public partial class Tabs : TabbedPage, CallViewInitiater, RegistrationListener
+    public partial class Tabs : TabbedPage, CallViewInitiater, LinphoneRegistrationListener
     {
         RegistrationService registrationService;
         public Tabs()

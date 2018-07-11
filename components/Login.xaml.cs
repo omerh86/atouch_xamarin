@@ -5,47 +5,50 @@ using Xamarin.Forms;
 using LinphoneXamarin.Entities;
 using LinphoneXamarin.Services;
 
+
 namespace LinphoneXamarin.components
 {
-    public partial class Login : ContentPage, RegistrationListener
+    public partial class Login : ContentPage, LoginRegistrationListener
     {
-        RegistrationService registrationService;
-
+        // RegistrationService registrationService;
+        LoginService loginService;
 
         public Login()
         {
-            registrationService = RegistrationService.Instance;
-            InitializeComponent();
+            loginService = LoginService.Instance;
+           InitializeComponent();
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            if (registrationService.registrationState == RegistrationState.Ok)
-            {
-                Navigation.PushAsync(new Tabs());
-                // registrationService.unRegister();
-            }
+            LoginInfo loginInfo = loginService.getTr87Cardential();
 
+            if (loginInfo != null)
+            {
+                username.Text = loginInfo.name;
+                password.Text = loginInfo.password;
+                domain.Text = loginInfo.ip;
+            }
         }
 
         private void OnRegisterClicked(object sender, EventArgs e)
         {
-            if (registrationService.registrationState == RegistrationState.Ok)
-            {
-                Navigation.PushAsync(new Tabs());
-                return;
-            }
-            registrationService.register(this, username.Text, password.Text, domain.Text);
+            loginService.setLoginRegistrationListener(this);
+            LoginInfo loginInfo = new LoginInfo(username.Text, password.Text, domain.Text);
+            loginService.saveTr87Cardential(loginInfo);
+            loginService.login(true, loginInfo);
         }
 
-        public void onStatusChanged(RegistrationState state)
+      
+        public void onLoginFailed(LoginError loginError)
         {
-            registration_status.Text = "Registration " + state;
-            if (state == RegistrationState.Ok)
-            {
-                Navigation.PushAsync(new Tabs());
-            }
+            Console.WriteLine("failed:" + loginError);
+        }
+
+        public void onLoginSuccsses()
+        {
+            Console.WriteLine("Succsses:");
         }
     }
 }

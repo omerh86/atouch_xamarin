@@ -24,6 +24,8 @@
       <DependentUpon>MySearch.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Enums.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\LoginInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Contact.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LinphoneWrapper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ContactService.cs" />
@@ -34,6 +36,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)components\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Services\LoginService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\RegistrationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Interfaces.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\MyCall.cs" />
@@ -50,6 +53,7 @@
       <DependentUpon>CallLog.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)components\MainViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Util\MyFileSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml">
@@ -107,5 +111,8 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)share_res\pacman.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Registration\" />
   </ItemGroup>
 </Project>

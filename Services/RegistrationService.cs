@@ -5,8 +5,6 @@ using LinphoneXamarin.Entities;
 namespace LinphoneXamarin.Services
 {
 
-
-
     public sealed class RegistrationService
     {
 
@@ -14,7 +12,7 @@ namespace LinphoneXamarin.Services
         private static readonly object padlock = new object();
 
         public RegistrationState registrationState = RegistrationState.None;
-        private RegistrationListener registrationListener;
+        private LinphoneRegistrationListener registrationListener;
         private Core LinphoneCore
         {
             get
@@ -67,18 +65,15 @@ namespace LinphoneXamarin.Services
 
         }
 
-        public void setRegistrationListener(RegistrationListener registrationListener)
+        public void setRegistrationListener(LinphoneRegistrationListener registrationListener)
         {
             this.registrationListener = registrationListener;
         }
 
-        public void register(RegistrationListener registrationListener, string name, string password, string ip)
+        public void register(string name, string password, string ip)
         {
-
-            setRegistrationListener(registrationListener);
-
             var authInfo = Factory.Instance.CreateAuthInfo(name, null, password, null, null, ip);
-            
+
             LinphoneCore.AddAuthInfo(authInfo);
             var proxyConfig = LinphoneCore.CreateProxyConfig();
             //  var identity = Factory.Instance.CreateAddress("sip:sample@domain.tld");
