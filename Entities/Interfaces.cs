@@ -18,7 +18,7 @@ namespace LinphoneXamarin.Entities
 
     public interface MyRegistrationListener
     {
-        void onStatusChanged(MyRegistrationState state, string message);
+        void onMyRegistrationStateChanged(MyRegistrationState state);
     }
 
     public interface CallsListener

@@ -11,6 +11,7 @@
             <Entry x:Name="password" Placeholder="Password" IsPassword="true"  />
             <Entry x:Name="domain" Placeholder="Domain"  />
             <Button x:Name="register" Text="Register" Clicked="OnRegisterClicked" HorizontalOptions="Center" />
+            <Button x:Name="register2" Text="Register2" Clicked="OnRegisterClicked2" HorizontalOptions="Center" />
             <Label x:Name="registration_status" HorizontalOptions="Center" />
         </StackLayout>
     </StackLayout>

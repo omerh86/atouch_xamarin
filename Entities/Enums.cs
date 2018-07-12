@@ -11,18 +11,7 @@ namespace LinphoneXamarin.Entities
         Aeonix
     }
 
-    public enum MyRegistrationState
-    {
-        BeforeTR87,
-        ConnectingTR87,
-        TR87Succsess,
-        TR87Fail,
-        ConnectingAeonix,
-        AeonixSucssess,
-        AeonixFail
-    }
-
-    public enum LoginError
+   public enum LoginError
     {
         TimeOut,
         RestartLogin,
@@ -30,6 +19,17 @@ namespace LinphoneXamarin.Entities
         InfoFailed,
         None
     }
+    public enum MyRegistrationState
+    {
+        BeforeTR87,
+        ConnectingTR87,
+        GetingInfo,
+        DisconnectingTR87,
+        ConnectingAeonix,
+        AfterAeonix
+
+    }
+
 
 
 }

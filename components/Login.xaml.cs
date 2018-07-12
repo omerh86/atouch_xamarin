@@ -16,7 +16,7 @@ namespace LinphoneXamarin.components
         public Login()
         {
             loginService = LoginService.Instance;
-           InitializeComponent();
+            InitializeComponent();
         }
 
         protected override void OnAppearing()
@@ -37,18 +37,35 @@ namespace LinphoneXamarin.components
             loginService.setLoginRegistrationListener(this);
             LoginInfo loginInfo = new LoginInfo(username.Text, password.Text, domain.Text);
             loginService.saveTr87Cardential(loginInfo);
-            loginService.login(true, loginInfo);
+            registration_status.Text = "Progress";
+            loginService.login(true);
         }
 
-      
+        private void OnRegisterClicked2(object sender, EventArgs e)
+        {
+            loginService.setLoginRegistrationListener(this);
+            LoginInfo loginInfo = new LoginInfo(username.Text, password.Text, domain.Text);
+            loginService.saveTr87Cardential(loginInfo);
+            registration_status.Text = "Progress";
+            loginService.login(false);
+        }
+
+
         public void onLoginFailed(LoginError loginError)
         {
-            Console.WriteLine("failed:" + loginError);
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                registration_status.Text = "Failed";
+            });
+          
         }
 
         public void onLoginSuccsses()
         {
-            Console.WriteLine("Succsses:");
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                registration_status.Text = "Succsses";
+            });
         }
     }
 }
