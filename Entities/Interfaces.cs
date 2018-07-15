@@ -6,7 +6,7 @@ namespace LinphoneXamarin.Entities
 {
     public interface LinphoneRegistrationListener
     {
-        void onStatusChanged(RegistrationState state);
+        void onLinphoneStatusChanged(RegistrationState state,string message);
     }
 
     public interface LoginRegistrationListener

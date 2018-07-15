@@ -26,6 +26,7 @@ namespace LinphoneXamarin.Entities
         GetingInfo,
         DisconnectingTR87,
         ConnectingAeonix,
+        InviteAeonix,
         AfterAeonix
 
     }

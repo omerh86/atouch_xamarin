@@ -71,7 +71,7 @@ namespace LinphoneXamarin.Services
                         {
                             myCalls[i].isCurrentCall = true;
                             onCurrentCallChanged(call);
-                           
+
                         }
                     }
                     else
@@ -98,7 +98,7 @@ namespace LinphoneXamarin.Services
             myCalls.Sort(delegate (MyCall x, MyCall y)
            {
                int a = x.isCurrentCall ? 0 : 1;
-                return a;
+               return a;
            });
         }
 
@@ -160,6 +160,15 @@ namespace LinphoneXamarin.Services
             }
         }
 
+        public void makeRegistrationCall()
+        {
+            var addr = LinphoneCore.InterpretUrl("1234");
+            CallParams cp = new CallParams();
+            cp.AddCustomHeader("Content-Disposition", "signal;handling=required");
+            cp.AddCustomHeader("TR87-Mode", "true");
+            cp.AddCustomHeader("User-Agent", "Tadiran Control-Mode ATouch PC/1.0.201 (belle-sip/1.6.3)");
+            LinphoneCore.InviteAddressWithParams(addr,cp);
+        }
 
 
         public void call(string address)

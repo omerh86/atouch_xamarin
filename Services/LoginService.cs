@@ -4,8 +4,7 @@ using Linphone;
 using LinphoneXamarin.Entities;
 using LinphoneXamarin.Util;
 using System.Threading.Tasks;
-
-
+using System.Threading;
 
 namespace LinphoneXamarin.Services
 {
@@ -54,45 +53,39 @@ namespace LinphoneXamarin.Services
         public void login(bool isIncludeTr87)
         {
             registrationService.setRegistrationListener(this);
-
-            new Task(() => {
-                registrationProcess.MoveNext(Command.Clear);
-                if (isIncludeTr87)
-                {
-                    registrationProcess.MoveNext(Command.StartAll);
-                }
-                else
-                {
-                    registrationProcess.MoveNext(Command.StartAeonix);
-                }
-            }).Start();
-          
-
-        }
-
-        public void onStatusChanged(MyRegistrationState state, string message)
-        {
-
-        }
-
-        public void onStatusChanged(RegistrationState state)
-        {
-            switch (state)
+            CancellationTokenSource ts = new CancellationTokenSource();
+            try
             {
-                case RegistrationState.Ok:
-                    registrationProcess.MoveNext(Command.Continue);
-                    break;
-                case RegistrationState.Failed:
-                case RegistrationState.Cleared:
-                case RegistrationState.None:
-                    registrationProcess.MoveNext(Command.Clear);
-                    break;
-                case RegistrationState.Progress:
-                    //do nothing
-                    break;
+
+                new Task(() =>
+                {
+
+                    resetLoginProccesss(false);
+                    if (isIncludeTr87)
+                    {
+                        registrationProcess.MoveNext(Command.StartAll);
+                    }
+                    else
+                    {
+                        registrationProcess.MoveNext(Command.StartAeonix);
+                    }
+                }).Start();
+
+                //throw new TimeoutException();
+            }
+            catch (AggregateException aggregateException)
+            {
+
+              //  resetLoginProccesss(true, LoginError.TimeOut);
+                throw aggregateException.InnerException;
             }
 
+
+
         }
+
+
+
 
         public void setLoginRegistrationListener(LoginRegistrationListener loginRegistrationListener)
         {
@@ -100,10 +93,18 @@ namespace LinphoneXamarin.Services
         }
 
 
-        private void loginTR87(LoginInfo loginInfo)
+        private void loginTR87()
         {
             Console.WriteLine("loginTR87");
-            registrationService.register(loginInfo.name, loginInfo.password, loginInfo.ip);
+            LoginInfo loginInfo = getTr87Cardential();
+            if (loginInfo != null)
+            {
+                registrationService.register(loginInfo.name, loginInfo.password, loginInfo.ip);
+            }
+            else
+            {
+
+            }
         }
 
         private void getInfo()
@@ -115,6 +116,7 @@ namespace LinphoneXamarin.Services
 
         private void loginAeonix()
         {
+            MyFileSystem.Instance.saveLoginCardential(new LoginInfo("2006A0D3C10DE55B", "A7nhe~6", "172.28.11.141"),CardentialState.Aeonix);
             LoginInfo loginInfo = MyFileSystem.Instance.loadLoginCardential(CardentialState.Aeonix);
             if (loginInfo != null)
             {
@@ -144,21 +146,47 @@ namespace LinphoneXamarin.Services
         }
 
 
-
-
         private void test(string a)
         {
             Console.WriteLine("omer40: " + a);
             registrationProcess.MoveNext(Command.Continue);
         }
 
-        private void test2(string a)
+        public void onLinphoneStatusChanged(RegistrationState state, string message)
         {
-            Console.WriteLine("omer41: " + a);
-            registrationProcess.MoveNext(Command.Clear);
-            fireLoginFailed(LoginError.RegistrationFailed);
+            switch (state)
+            {
+                case RegistrationState.Ok:
+                    registrationProcess.MoveNext(Command.Continue);
+                    break;
+                case RegistrationState.Failed:
+                case RegistrationState.Cleared:
+                case RegistrationState.None:
+                    switch (message)
+                    {
+                        case "Unauthorized":
+                            resetLoginProccesss(true, LoginError.RegistrationFailed);
+                            break;
+                        default:
+                            resetLoginProccesss(true, LoginError.RegistrationFailed);
+                            break;
+
+                    }
+                    break;
+                case RegistrationState.Progress:
+                    //do nothing
+                    break;
+            }
+
         }
 
+        private void resetLoginProccesss(bool isFailed, LoginError loginError = LoginError.None)
+        {
+            registrationProcess.MoveNext(Command.Clear);
+            if (isFailed)
+                fireLoginFailed(LoginError.RegistrationFailed);
+
+        }
 
 
         public void onMyRegistrationStateChanged(MyRegistrationState state)
@@ -170,17 +198,19 @@ namespace LinphoneXamarin.Services
                     Console.WriteLine("omer40: " + "BeforeTR87");
                     break;
                 case MyRegistrationState.ConnectingTR87:
-                    //this.loginTR87(getTr87Cardential());
-                    test("ConnectingTR87");
+                    this.loginTR87();
                     break;
                 case MyRegistrationState.GetingInfo:
-                    test2("GetingInfo");
+                    test("GetingInfo");
                     break;
                 case MyRegistrationState.DisconnectingTR87:
                     test("DisconnectingTR87");
                     break;
                 case MyRegistrationState.ConnectingAeonix:
-                    test("ConnectingAeonix");
+                    this.loginAeonix();
+                    break;
+                case MyRegistrationState.InviteAeonix:
+                    CallService.Instance.makeRegistrationCall();
                     break;
                 case MyRegistrationState.AfterAeonix:
                     fireLoginSuccsess();
@@ -239,13 +269,15 @@ namespace LinphoneXamarin.Services
                  { new StateTransition( MyRegistrationState.ConnectingTR87, Command.Continue), MyRegistrationState.GetingInfo},
                 { new StateTransition(MyRegistrationState.GetingInfo, Command.Continue), MyRegistrationState.DisconnectingTR87},
                 { new StateTransition(MyRegistrationState.DisconnectingTR87, Command.Continue), MyRegistrationState.ConnectingAeonix},
-                { new StateTransition(MyRegistrationState.ConnectingAeonix, Command.Continue), MyRegistrationState.AfterAeonix},
+                { new StateTransition(MyRegistrationState.ConnectingAeonix, Command.Continue), MyRegistrationState.InviteAeonix},
+                { new StateTransition(MyRegistrationState.InviteAeonix, Command.Continue), MyRegistrationState.AfterAeonix},
                 { new StateTransition(MyRegistrationState.AfterAeonix, Command.Continue), MyRegistrationState.AfterAeonix},
                 { new StateTransition(MyRegistrationState.BeforeTR87, Command.Clear), MyRegistrationState.BeforeTR87},
                 { new StateTransition(MyRegistrationState.ConnectingTR87, Command.Clear), MyRegistrationState.BeforeTR87},
                 { new StateTransition(MyRegistrationState.GetingInfo, Command.Clear), MyRegistrationState.BeforeTR87},
                 { new StateTransition(MyRegistrationState.DisconnectingTR87, Command.Clear), MyRegistrationState.BeforeTR87},
                 { new StateTransition(MyRegistrationState.ConnectingAeonix, Command.Clear), MyRegistrationState.BeforeTR87},
+                { new StateTransition(MyRegistrationState.InviteAeonix, Command.Clear), MyRegistrationState.BeforeTR87},
                 { new StateTransition(MyRegistrationState.AfterAeonix, Command.Clear), MyRegistrationState.BeforeTR87}
             };
             }

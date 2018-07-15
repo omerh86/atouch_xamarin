@@ -26,7 +26,7 @@ namespace LinphoneXamarin.Services
 
             if (this.registrationListener != null && this.registrationState != state)
             {
-                registrationListener.onStatusChanged(state);
+                registrationListener.onLinphoneStatusChanged(state, message);
             }
             this.registrationState = state;
         }
@@ -81,8 +81,9 @@ namespace LinphoneXamarin.Services
             identity.Username = name;
             identity.Domain = ip;
             identity.Transport = TransportType.Tcp;
-            //identity.Port = 5083;
+            identity.Port = 5060;
             proxyConfig.Edit();
+            proxyConfig.SetCustomHeader("User-Agent", "Tadiran Control-Mode ATouch PC/1.0.201 (belle-sip/1.6.3)");
             proxyConfig.IdentityAddress = identity;
             proxyConfig.ServerAddr = identity.AsString();
             proxyConfig.Route = identity.AsString();
@@ -90,12 +91,11 @@ namespace LinphoneXamarin.Services
             proxyConfig.Done();
             LinphoneCore.AddProxyConfig(proxyConfig);
             LinphoneCore.DefaultProxyConfig = proxyConfig;
-
             LinphoneCore.RefreshRegisters();
         }
 
 
-        public void unRegister()
+       public void unRegister()
         {
             if (LinphoneCore.DefaultProxyConfig != null)
             {

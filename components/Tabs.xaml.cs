@@ -29,7 +29,7 @@ namespace LinphoneXamarin.components
             Navigation.PushAsync(new MainPage());
         }
 
-        public void onStatusChanged(RegistrationState state)
+        public void onLinphoneStatusChanged(RegistrationState state,string message)
         {
             if (state == RegistrationState.Failed || state == RegistrationState.None || state == RegistrationState.Cleared)
             {
