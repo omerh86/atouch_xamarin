@@ -113,7 +113,4 @@
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)share_res\pacman.mp3" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Registration\" />
-  </ItemGroup>
 </Project>

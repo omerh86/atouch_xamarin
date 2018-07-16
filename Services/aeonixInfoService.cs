@@ -22,7 +22,7 @@ namespace LinphoneXamarin.Services
         private void OnInfoRecived(Core lc, Call call, InfoMessage msg)
         {
             Console.WriteLine("omer40" + msg.ToString());
-
+           
         }
 
         private void onNotifyReceived(Core lc, Object ev, string eventName, Object content)
@@ -30,19 +30,24 @@ namespace LinphoneXamarin.Services
             Console.WriteLine("omer40" + eventName.ToString());
         }
 
+        private void globalState(Core lc, GlobalState state, String message)
+        {
+            Console.WriteLine("omer40" + message.ToString());
+        }
 
+       
 
 
         private CoreListener Listener;
 
         AeonixInfoService()
         {
-            Listener = Factory.Instance.CreateCoreListener();
+            Listener = ((App)App.Current).coreListener;
             Listener.OnInfoReceived = OnInfoRecived;
             Listener.OnNotifyReceived = onNotifyReceived;
-
+            Listener.OnGlobalStateChanged = globalState;
             LinphoneCore.AddListener(Listener);
-        }
+          }
 
         public static AeonixInfoService Instance
         {
@@ -82,6 +87,7 @@ namespace LinphoneXamarin.Services
             infoMessage.Content = content;
 
             call.SendInfoMessage(infoMessage);
+          
         }
 
 

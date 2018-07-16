@@ -63,13 +63,13 @@ namespace LinphoneXamarin.Util
 
         }
 
-        private T jsonToObj<T>(string val)
+        public T jsonToObj<T>(string val)
         {
             T loginInfo = JsonConvert.DeserializeObject<T>(val);
             return loginInfo;
         }
 
-        private string objToJson<T>(T obj)
+        public string objToJson<T>(T obj)
         {
             string res = JsonConvert.SerializeObject(obj);
             return res;

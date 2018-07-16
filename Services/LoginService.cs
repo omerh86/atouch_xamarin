@@ -9,7 +9,7 @@ using System.Threading;
 namespace LinphoneXamarin.Services
 {
 
-    public sealed class LoginService : LinphoneRegistrationListener, MyRegistrationListener
+    public sealed class LoginService : LinphoneRegistrationListener, MyRegistrationListener, Tr87stateListener
     {
         RegistrationService registrationService;
         LoginRegistrationListener loginRegistrationListener;
@@ -27,6 +27,7 @@ namespace LinphoneXamarin.Services
             registrationProcess = new RegistrationProcess();
             registrationProcess.MyRegistrationListener = this;
             callService = CallService.Instance;
+            callService.setTr87Listener(this);
             aeonixInfoService = AeonixInfoService.Instance;
 
         }
@@ -215,13 +216,18 @@ namespace LinphoneXamarin.Services
                     this.loginAeonix();
                     break;
                 case MyRegistrationState.InviteAeonix:
-                    CallService.Instance.makeRegistrationCall();
+                    CallService.Instance.makeTr87Call();
                     break;
                 case MyRegistrationState.AfterAeonix:
                     fireLoginSuccsess();
                     //do nothing
                     break;
             }
+        }
+
+        public void onTr87Established()
+        {
+            registrationProcess.MoveNext(Command.Continue);
         }
 
         public enum Command
@@ -232,7 +238,6 @@ namespace LinphoneXamarin.Services
             Clear
 
         }
-
 
         public class RegistrationProcess
         {

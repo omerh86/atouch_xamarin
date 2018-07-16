@@ -12,6 +12,7 @@
             <Entry x:Name="domain" Placeholder="Domain"  />
             <Button x:Name="register" Text="Register" Clicked="OnRegisterClicked" HorizontalOptions="Center" />
             <Button x:Name="register2" Text="Register2" Clicked="OnRegisterClicked2" HorizontalOptions="Center" />
+            <Button x:Name="Send" Text="send" IsVisible="False" Clicked="OnsendRequest" HorizontalOptions="Center" />
             <Label x:Name="registration_status" HorizontalOptions="Center" />
         </StackLayout>
     </StackLayout>

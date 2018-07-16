@@ -6,7 +6,17 @@ namespace LinphoneXamarin.Entities
 {
     public interface LinphoneRegistrationListener
     {
-        void onLinphoneStatusChanged(RegistrationState state,string message);
+        void onLinphoneStatusChanged(RegistrationState state, string message);
+    }
+
+    public interface MyRegistrationListener
+    {
+        void onMyRegistrationStateChanged(MyRegistrationState state);
+    }
+
+    public interface Tr87stateListener
+    {
+        void onTr87Established();
     }
 
     public interface LoginRegistrationListener
@@ -14,11 +24,6 @@ namespace LinphoneXamarin.Entities
         void onLoginFailed(LoginError loginError);
         void onLoginSuccsses();
 
-    }
-
-    public interface MyRegistrationListener
-    {
-        void onMyRegistrationStateChanged(MyRegistrationState state);
     }
 
     public interface CallsListener

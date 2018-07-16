@@ -30,10 +30,10 @@ namespace LinphoneXamarin.Services
             }
             this.registrationState = state;
         }
-
+   
         RegistrationService()
         {
-            Listener = Factory.Instance.CreateCoreListener();
+            Listener = ((App)App.Current).coreListener;
             Listener.OnRegistrationStateChanged = OnRegistration;
             LinphoneCore.AddListener(Listener);
             logger();

@@ -15,6 +15,7 @@ namespace LinphoneXamarin.Services
         private static CallService instance = null;
         private static readonly object padlock = new object();
         private CallsListener callsListener;
+        private Tr87stateListener tr87StateListener;
         private CallViewInitiater callViewInitiater;
 
         public bool isSpeaker = false;
@@ -34,14 +35,22 @@ namespace LinphoneXamarin.Services
         private void OnCall(Core lc, Call lcall, CallState state, string message)
         {
 
-            if (state == CallState.StreamsRunning )
+            if (state == CallState.StreamsRunning)
             {
                 bool b = lcall.RemoteAddressAsString.Contains("sip:1234");
                 if (b)
                 {
                     tr87Call = lcall;
-                    lcall.Pause();
-                   // AeonixInfoService.Instance.sendToInfoAeonix("Hi Avi(:");
+                    try
+                    {
+                        lcall.Pause();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("");
+                    };
+                    // AeonixInfoService.Instance.sendToInfoAeonix("Hi Avi(:");
+                    this.firetr87Established();
                 }
             }
             this.callViewInitiaterHandler(state);
@@ -150,7 +159,7 @@ namespace LinphoneXamarin.Services
 
         CallService()
         {
-            Listener = Factory.Instance.CreateCoreListener();
+            Listener = ((App)App.Current).coreListener;
             Listener.OnCallStateChanged = OnCall;
             LinphoneCore.AddListener(Listener);
         }
@@ -170,7 +179,7 @@ namespace LinphoneXamarin.Services
             }
         }
 
-        public void makeRegistrationCall()
+        public void makeTr87Call()
         {
             var addr = LinphoneCore.InterpretUrl("1234");
 
@@ -274,6 +283,19 @@ namespace LinphoneXamarin.Services
         public void setCallsListener(CallsListener callsListener)
         {
             this.callsListener = callsListener;
+        }
+
+        public void setTr87Listener(Tr87stateListener tr87StateListener)
+        {
+            this.tr87StateListener = tr87StateListener;
+        }
+
+        private void firetr87Established()
+        {
+            if (this.tr87StateListener != null)
+            {
+                this.tr87StateListener.onTr87Established();
+            }
         }
 
         public void setCallsViewInitiater(CallViewInitiater callViewInitiater)

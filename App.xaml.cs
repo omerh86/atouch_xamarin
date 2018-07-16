@@ -21,6 +21,7 @@ namespace LinphoneXamarin
     {
         public static MainViewModel viewModel;
         public Core LinphoneCore { get; set; }
+        public CoreListener coreListener { get; set; }
 
 
         public App(string rc_path = null)
@@ -32,6 +33,7 @@ namespace LinphoneXamarin
             CoreListener listener = Factory.Instance.CreateCoreListener();
             listener.OnGlobalStateChanged = OnGlobal;
             LinphoneCore = Factory.Instance.CreateCore(listener, rc_path, null);
+            coreListener= Factory.Instance.CreateCoreListener();
             setLinphoneSettings();
 
             MainPage = new NavigationPage(new components.Login());
@@ -42,6 +44,7 @@ namespace LinphoneXamarin
                 Command = new Command(this.ShowSettingsPage),
             };
             MainPage.ToolbarItems.Add(settings);
+            
         }
 
         private void ShowSettingsPage()
