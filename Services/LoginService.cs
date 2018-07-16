@@ -18,11 +18,16 @@ namespace LinphoneXamarin.Services
         private static readonly object padlock = new object();
         RegistrationProcess registrationProcess;
 
+        CallService callService;
+        AeonixInfoService aeonixInfoService;
+
         LoginService()
         {
             registrationService = RegistrationService.Instance;
             registrationProcess = new RegistrationProcess();
             registrationProcess.MyRegistrationListener = this;
+            callService = CallService.Instance;
+            aeonixInfoService = AeonixInfoService.Instance;
 
         }
         public static LoginService Instance
@@ -76,7 +81,7 @@ namespace LinphoneXamarin.Services
             catch (AggregateException aggregateException)
             {
 
-              //  resetLoginProccesss(true, LoginError.TimeOut);
+                //  resetLoginProccesss(true, LoginError.TimeOut);
                 throw aggregateException.InnerException;
             }
 
@@ -116,7 +121,7 @@ namespace LinphoneXamarin.Services
 
         private void loginAeonix()
         {
-            MyFileSystem.Instance.saveLoginCardential(new LoginInfo("2006A0D3C10DE55B", "A7nhe~6", "172.28.11.141"),CardentialState.Aeonix);
+            MyFileSystem.Instance.saveLoginCardential(new LoginInfo("2006A0D3C10DE55B", "A7nhe~6", "172.28.11.141"), CardentialState.Aeonix);
             LoginInfo loginInfo = MyFileSystem.Instance.loadLoginCardential(CardentialState.Aeonix);
             if (loginInfo != null)
             {

@@ -28,6 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Entities\LoginInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Contact.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LinphoneWrapper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\aeonixInfoService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ContactService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\CallService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)components\Login.xaml.cs">

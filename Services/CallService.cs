@@ -21,8 +21,7 @@ namespace LinphoneXamarin.Services
         public bool isMute = false;
         public bool isPaused = false;
         public bool isConferenced = false;
-
-
+        public Call tr87Call;
         private Core LinphoneCore
         {
             get
@@ -34,6 +33,17 @@ namespace LinphoneXamarin.Services
 
         private void OnCall(Core lc, Call lcall, CallState state, string message)
         {
+
+            if (state == CallState.StreamsRunning )
+            {
+                bool b = lcall.RemoteAddressAsString.Contains("sip:1234");
+                if (b)
+                {
+                    tr87Call = lcall;
+                    lcall.Pause();
+                   // AeonixInfoService.Instance.sendToInfoAeonix("Hi Avi(:");
+                }
+            }
             this.callViewInitiaterHandler(state);
             this.updateMycalls(lcall, state);
             this.fireOnMycallsUpdated();
@@ -163,11 +173,12 @@ namespace LinphoneXamarin.Services
         public void makeRegistrationCall()
         {
             var addr = LinphoneCore.InterpretUrl("1234");
-            CallParams cp = new CallParams();
+
+            CallParams cp = LinphoneCore.CreateCallParams(null);
             cp.AddCustomHeader("Content-Disposition", "signal;handling=required");
             cp.AddCustomHeader("TR87-Mode", "true");
-            cp.AddCustomHeader("User-Agent", "Tadiran Control-Mode ATouch PC/1.0.201 (belle-sip/1.6.3)");
-            LinphoneCore.InviteAddressWithParams(addr,cp);
+            cp.AddCustomHeader("User-Agent", "Tadiran ATouch PC/1.0.201 (belle-sip/1.6.3)");
+            LinphoneCore.InviteAddressWithParams(addr, cp);
         }
 
 

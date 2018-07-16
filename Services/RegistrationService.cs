@@ -81,9 +81,9 @@ namespace LinphoneXamarin.Services
             identity.Username = name;
             identity.Domain = ip;
             identity.Transport = TransportType.Tcp;
-            identity.Port = 5060;
+           identity.Port = 5060;
             proxyConfig.Edit();
-            proxyConfig.SetCustomHeader("User-Agent", "Tadiran Control-Mode ATouch PC/1.0.201 (belle-sip/1.6.3)");
+            proxyConfig.SetCustomHeader("User-Agent", "Tadiran ATouch PC/1.0.201 (belle-sip/1.6.3)");
             proxyConfig.IdentityAddress = identity;
             proxyConfig.ServerAddr = identity.AsString();
             proxyConfig.Route = identity.AsString();
