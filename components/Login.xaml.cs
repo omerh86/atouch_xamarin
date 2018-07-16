@@ -16,6 +16,7 @@ namespace LinphoneXamarin.components
 
         public Login()
         {
+
             loginService = LoginService.Instance;
             InitializeComponent();
         }
@@ -96,9 +97,10 @@ namespace LinphoneXamarin.components
             Device.BeginInvokeOnMainThread(() =>
             {
                 registration_status.Text = "Succsses";
-               // Send.IsVisible = true;
-                Navigation.PushAsync(new Tabs());
-                Navigation.RemovePage(this);
+                // Send.IsVisible = true;
+                // Navigation.PushAsync(new Tabs());
+                // Navigation.RemovePage(this);
+                ((App)App.Current).MainPage = new components.navBar();
             });
         }
     }

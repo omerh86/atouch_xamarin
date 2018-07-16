@@ -19,7 +19,7 @@ namespace LinphoneXamarin
 {
     public partial class App : Application
     {
-        public static MainViewModel viewModel;
+      
         public Core LinphoneCore { get; set; }
         public CoreListener coreListener { get; set; }
 
@@ -28,7 +28,7 @@ namespace LinphoneXamarin
         {
 
             LinphoneWrapper.setNativeLogHandler();
-            viewModel = new MainViewModel();
+            
             Core.SetLogLevelMask(0xFF);
             CoreListener listener = Factory.Instance.CreateCoreListener();
             listener.OnGlobalStateChanged = OnGlobal;
@@ -36,7 +36,9 @@ namespace LinphoneXamarin
             coreListener= Factory.Instance.CreateCoreListener();
             setLinphoneSettings();
 
-            MainPage = new NavigationPage(new components.Login());
+            // MainPage = new NavigationPage(new components.Login());
+         //   MainPage = new components.navBar();
+             MainPage = new components.Login();
             MainPage.Title = "Aeonix";
             var settings = new ToolbarItem
             {

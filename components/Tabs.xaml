@@ -9,4 +9,6 @@
     <pages:DialPad Icon="icon.png" />
     <pages:MainPage Icon="icon.png" />
     <pages:Messages Icon="icon.png" />
+    
+    
 </TabbedPage>
