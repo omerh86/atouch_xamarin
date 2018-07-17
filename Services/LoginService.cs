@@ -56,6 +56,16 @@ namespace LinphoneXamarin.Services
             MyFileSystem.Instance.saveLoginCardential(loginInfo, CardentialState.TR87);
         }
 
+        public bool isRegistered()
+        {
+            RegistrationState r = registrationService.registrationState;
+            if (r == RegistrationState.Ok)
+                return true;
+            else
+                return false;
+
+        }
+
         public void login(bool isIncludeTr87)
         {
             registrationService.setRegistrationListener(this);
@@ -201,6 +211,7 @@ namespace LinphoneXamarin.Services
             {
                 case MyRegistrationState.BeforeTR87:
                     //make sure disconnection
+
                     Console.WriteLine("omer40: " + "BeforeTR87");
                     break;
                 case MyRegistrationState.ConnectingTR87:

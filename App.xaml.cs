@@ -36,9 +36,9 @@ namespace LinphoneXamarin
             coreListener= Factory.Instance.CreateCoreListener();
             setLinphoneSettings();
 
-            // MainPage = new NavigationPage(new components.Login());
+             MainPage = new NavigationPage(new components.Login());
          //   MainPage = new components.navBar();
-             MainPage = new components.Login();
+            // MainPage = new components.Login();
             MainPage.Title = "Aeonix";
             var settings = new ToolbarItem
             {

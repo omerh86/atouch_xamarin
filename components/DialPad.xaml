@@ -15,11 +15,11 @@
             <Style x:Key="greenButton" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="Green" />
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="BorderRadius" Value="0" />
+                <Setter Property="BorderRadius" Value="25" />
                 <Setter Property="FontSize" Value="Small" />
             </Style>
-            <Style x:Key="orangeButton" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="#E8AD00" />
+            <Style x:Key="blueButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#00688f" />
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="BorderRadius" Value="0" />
                 <Setter Property="FontSize" Value="Small" />
@@ -27,7 +27,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand">
+        <StackLayout Orientation="Vertical" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             <StackLayout Padding="10 " BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                 <Label YAlign="Center" HorizontalOptions="StartAndExpand" Text="{Binding}" />
                 <Button Clicked="clear" Text="&#xf55a;" BorderColor="Transparent" BackgroundColor="Transparent" TextColor="DimGray" FontSize="Medium">
@@ -37,7 +37,7 @@
                 </Button>
                 <!--<Button  Text="Clear" HorizontalOptions="End" Clicked="clear" />-->
             </StackLayout>
-            <Grid x:Name="controlGrid" RowSpacing="1" ColumnSpacing="1">
+            <Grid VerticalOptions="End" x:Name="controlGrid" RowSpacing="1" ColumnSpacing="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="150" />
                     <RowDefinition Height="*" />
@@ -52,16 +52,16 @@
                 </Grid.ColumnDefinitions>
                 <Label Text="0" Grid.Row="0" HorizontalTextAlignment="End" VerticalTextAlignment="End" TextColor="White" Grid.ColumnSpan="2" />
                 <Button Clicked="onDialPadClicked" Text="1" Grid.Row="1" Grid.Column="0" Style="{StaticResource plainButton}" />
-                <Button Clicked="onDialPadClicked" Text="2" Grid.Row="1" Grid.Column="1" Style="{StaticResource orangeButton}" />
+                <Button Clicked="onDialPadClicked" Text="2" Grid.Row="1" Grid.Column="1" Style="{StaticResource blueButton}" />
                 <Button Clicked="onDialPadClicked" Text="3" Grid.Row="1" Grid.Column="2" Style="{StaticResource plainButton}" />
                 <Button Clicked="onDialPadClicked" Text="4" Grid.Row="2" Grid.Column="0" Style="{StaticResource plainButton}" />
-                <Button Clicked="onDialPadClicked" Text="5" Grid.Row="2" Grid.Column="1" Style="{StaticResource orangeButton}" />
+                <Button Clicked="onDialPadClicked" Text="5" Grid.Row="2" Grid.Column="1" Style="{StaticResource blueButton}" />
                 <Button Clicked="onDialPadClicked" Text="6" Grid.Row="2" Grid.Column="2" Style="{StaticResource plainButton}" />
                 <Button Clicked="onDialPadClicked" Text="7" Grid.Row="3" Grid.Column="0" Style="{StaticResource plainButton}" />
-                <Button Clicked="onDialPadClicked" Text="8" Grid.Row="3" Grid.Column="1" Style="{StaticResource orangeButton}" />
+                <Button Clicked="onDialPadClicked" Text="8" Grid.Row="3" Grid.Column="1" Style="{StaticResource blueButton}" />
                 <Button Clicked="onDialPadClicked" Text="9" Grid.Row="3" Grid.Column="2" Style="{StaticResource plainButton}" />
                 <Button Clicked="onDialPadClicked" Text="*" Grid.Row="4" Grid.Column="0" Style="{StaticResource plainButton}" />
-                <Button Clicked="onDialPadClicked" Text="0" Grid.Row="4" Grid.Column="1" Style="{StaticResource orangeButton}" />
+                <Button Clicked="onDialPadClicked" Text="0" Grid.Row="4" Grid.Column="1" Style="{StaticResource blueButton}" />
                 <Button Clicked="onDialPadClicked" Text="#" Grid.Row="4" Grid.Column="2" Style="{StaticResource plainButton}" />
                 <Button Clicked="OnCallClicked" Text="call" Grid.ColumnSpan="3" Grid.Row="5" Grid.Column="0" Style="{StaticResource greenButton}" />
             </Grid>

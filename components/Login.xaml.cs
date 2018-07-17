@@ -32,6 +32,8 @@ namespace LinphoneXamarin.components
                 password.Text = loginInfo.password;
                 domain.Text = loginInfo.ip;
             }
+            if (loginService.isRegistered())
+                registration_status.Text = "All ready LoggedIn";
         }
 
         private void OnRegisterClicked(object sender, EventArgs e)
