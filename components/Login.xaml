@@ -7,12 +7,12 @@
                  HorizontalOptions="FillAndExpand" Orientation="Vertical"  Spacing="15">
         <Label Margin="10" Text="Welcome to Aeonix Touch !" FontSize="Large" TextColor="Black" HorizontalOptions="Center" />
         <StackLayout VerticalOptions="Center" x:Name="stack_registrar">
-            <Entry Margin="10" x:Name="username" Placeholder="Username" />
-            <Entry Margin="10" x:Name="password" Placeholder="Password" IsPassword="true"  />
-            <Entry Margin="10" x:Name="domain" Placeholder="Address"  />
-            <Button x:Name="register" Text="Register" Clicked="OnRegisterClicked" HorizontalOptions="Center" />
-            <Button BackgroundColor="#00688f" BorderRadius="25" x:Name="register2" Text="Login" Clicked="OnRegisterClicked2" HorizontalOptions="Center" />
-            <Button x:Name="Send" Text="send" IsVisible="False" Clicked="OnsendRequest" HorizontalOptions="Center" />
+            <Entry Margin="8" x:Name="username" Placeholder="Username" />
+            <Entry Margin="8" x:Name="password" Placeholder="Password" IsPassword="true"  />
+            <Entry Margin="8" x:Name="domain" Placeholder="Address"  />
+            <!--<Button x:Name="register" Text="Register" Clicked="OnRegisterClicked" HorizontalOptions="Center" />-->
+            <Button BackgroundColor="#00688f" TextColor="White" BorderRadius="25" x:Name="register2" Text="Login" Clicked="OnRegisterClicked2" HorizontalOptions="Center" />
+            <Button  x:Name="Send" Text="send" IsVisible="False" Clicked="OnsendRequest" HorizontalOptions="Center" />
             <Label x:Name="registration_status" HorizontalOptions="Center" />
         </StackLayout>
     </StackLayout>

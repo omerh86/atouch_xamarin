@@ -23,11 +23,11 @@ namespace LinphoneXamarin.Services
         private CoreListener Listener;
         private void OnRegistration(Core lc, ProxyConfig config, RegistrationState state, string message)
         {
-
             if (this.registrationListener != null && this.registrationState != state)
             {
                 registrationListener.onLinphoneStatusChanged(state, message);
             }
+           
             this.registrationState = state;
         }
 

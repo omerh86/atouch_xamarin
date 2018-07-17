@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LinphoneXamarin.Services;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -23,11 +24,14 @@ namespace LinphoneXamarin.components
             var item = e.SelectedItem as navBarMenuItem;
             if (item == null)
                 return;
-
+            if (item.Id == 3)
+            {
+                RegistrationService.Instance.unRegister();
+                return;
+            }
             var page = (Page)Activator.CreateInstance(item.TargetType);
             page.Title = item.Title;
 
-            // Detail = new NavigationPage(page);
             Detail.Navigation.PushAsync(page);
 
             IsPresented = false;

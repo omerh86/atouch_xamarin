@@ -45,7 +45,7 @@ namespace LinphoneXamarin.components
             this.BindingContext = callsList;
             if (this.callsList.Count == 0)
             {
-                Navigation.RemovePage(this);
+               // Navigation.RemovePage(this);
             }
             this.setActionsStatus();
 

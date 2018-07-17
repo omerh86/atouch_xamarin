@@ -33,8 +33,9 @@ namespace LinphoneXamarin.components
         {
             if (state == RegistrationState.Failed || state == RegistrationState.None || state == RegistrationState.Cleared)
             {
-                registrationService.unRegister();
-                Navigation.RemovePage(this);
+                //registrationService.unRegister();
+                registrationService.setRegistrationListener(null);
+                ((App)App.Current).MainPage = new NavigationPage(new components.Login());
             }
         }
     }

@@ -25,7 +25,7 @@ namespace LinphoneXamarin.components
         {
             base.OnAppearing();
             LoginInfo loginInfo = loginService.getTr87Cardential();
-
+           
             if (loginInfo != null)
             {
                 username.Text = loginInfo.name;
@@ -34,11 +34,13 @@ namespace LinphoneXamarin.components
             }
             if (loginService.isRegistered())
                 registration_status.Text = "All ready LoggedIn";
+
+            loginService.setLoginRegistrationListener(this);
         }
 
         private void OnRegisterClicked(object sender, EventArgs e)
         {
-            loginService.setLoginRegistrationListener(this);
+           
             LoginInfo loginInfo = new LoginInfo(username.Text, password.Text, domain.Text);
             loginService.saveTr87Cardential(loginInfo);
             registration_status.Text = "Progress";
@@ -47,7 +49,7 @@ namespace LinphoneXamarin.components
 
         private void OnRegisterClicked2(object sender, EventArgs e)
         {
-            loginService.setLoginRegistrationListener(this);
+            
             LoginInfo loginInfo = new LoginInfo(username.Text, password.Text, domain.Text);
             loginService.saveTr87Cardential(loginInfo);
             registration_status.Text = "Progress";
