@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" Title="Messages" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="LinphoneXamarin.components.Messages">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             Title="" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LinphoneXamarin.components.Messages"
+                xmlns:control="clr-namespace:LinphoneXamarin.components.userControllers">
     <ContentPage.Content>
+        <StackLayout  x:Name="stack_layout" VerticalOptions="Fill" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="15">
+            <control:MySearch x:Name="search" Command="{Binding} " />
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

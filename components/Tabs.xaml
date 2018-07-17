@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TabbedPage BackgroundColor="WhiteSmoke"
+<TabbedPage 
             Title="Aeonix"
-            xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             x:Class="LinphoneXamarin.components.Tabs"
             xmlns:pages="clr-namespace:LinphoneXamarin.components">
-    <pages:Favorites Icon="icon.png" />
-    <pages:DialPad Icon="icon.png" />
-    <pages:MainPage Icon="icon.png" />
-    <pages:Messages Icon="icon.png" />
+    <pages:Favorites Icon="contact.png" />
+    <pages:DialPad Icon="dialpad.png" />
+    <pages:Messages Icon="chat.png" />
+    <pages:MainPage Icon="voicemail.png" />
     
     
 </TabbedPage>

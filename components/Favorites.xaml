@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             Title="Favorites"
-                
+             Title=""
              x:Class="LinphoneXamarin.components.Favorites"
-              xmlns:control="clr-namespace:LinphoneXamarin.components.userControllers">
+            xmlns:control="clr-namespace:LinphoneXamarin.components.userControllers">
 
     <StackLayout  x:Name="stack_layout" VerticalOptions="Fill" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="15">
-       
+
         <control:MySearch x:Name="search" Command="{Binding} " />
 
-      <StackLayout VerticalOptions="FillAndExpand" >
-        <ListView x:Name="favorites" ItemsSource="{Binding}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <control:ContactCell isFav="{Binding isFav}" userName="{Binding userName}" displayName="{Binding displayName}" alias="{Binding alias}" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-     </StackLayout>
+        <StackLayout VerticalOptions="FillAndExpand" >
+            <ListView x:Name="favorites" ItemsSource="{Binding}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <control:ContactCell isFav="{Binding isFav}" userName="{Binding userName}" displayName="{Binding displayName}" alias="{Binding alias}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
     </StackLayout>
 </ContentPage>

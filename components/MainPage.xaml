@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" Title="Test" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:LinphoneXamarin" x:Class="LinphoneXamarin.components.MainPage">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" Title="" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:LinphoneXamarin" x:Class="LinphoneXamarin.components.MainPage">
     <StackLayout x:Name="stack_layout" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="15">
         <Button x:Name="Answer" Text="Answer" Clicked="OnAnswerClicked" HorizontalOptions="Center" />
         <Button x:Name="Terminate" Text="Terminate" Clicked="OnTerminateClicked" HorizontalOptions="Center" />
