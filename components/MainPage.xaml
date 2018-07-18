@@ -24,7 +24,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />
                 <RowDefinition Height="*" />
-              
+
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -34,27 +34,27 @@
             </Grid.ColumnDefinitions>
 
 
-            <Button x:Name="hold"  Clicked="OnHoldClicked" Grid.Row="0" Grid.Column="0" Text="&#xf28b;" BorderColor="Transparent" BackgroundColor="Transparent" TextColor="DimGray" FontSize="Medium"  >
+            <Button x:Name="hold"  Clicked="OnHoldClicked" Grid.Row="0" Grid.Column="0" Text="&#xf28b;" BorderColor="Transparent" BackgroundColor="Transparent" TextColor="DimGray" FontSize="Large"  >
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" iOS="FontAwesome5FreeSolid" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
                 </Button.FontFamily>
             </Button>
-            <Button  Clicked="onConferenceCalls" Grid.Row="0" Grid.Column="1" Text="&#xf55a;" BorderColor="Transparent" BackgroundColor="Transparent" TextColor="DimGray" FontSize="Medium" >
+            <Button x:Name="conference" IsEnabled="False" Clicked="onConferenceCalls" Grid.Row="0" Grid.Column="1" Text="&#xf55a;" BorderColor="Transparent" BackgroundColor="Transparent" TextColor="DimGray" FontSize="Large" >
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" iOS="FontAwesome5FreeSolid" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
                 </Button.FontFamily>
             </Button>
-            <Button  Clicked="onToggleSpeakerAsync" Grid.Row="0" Grid.Column="2" Text="&#xf028;" BorderColor="Transparent" BackgroundColor="Transparent" TextColor="DimGray" FontSize="Medium"  >
+            <Button  x:Name="speaker" IsEnabled="False" Clicked="onToggleSpeakerAsync" Grid.Row="0" Grid.Column="2" Text="&#xf028;" BorderColor="Transparent" BackgroundColor="Transparent" TextColor="DimGray" FontSize="Large"  >
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" iOS="FontAwesome5FreeSolid" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
                 </Button.FontFamily>
             </Button>
-            <Button x:Name="Answer"  Clicked="OnAnswerClicked" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"   Text="&#xf095;" BorderColor="Transparent" BackgroundColor="Green" TextColor="White" FontSize="Medium" >
+            <Button x:Name="Answer"  Clicked="OnAnswerClicked" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"   Text="&#xf095;" BorderColor="Transparent" BackgroundColor="Green" TextColor="White" FontSize="Large" >
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" iOS="FontAwesome5FreeSolid" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
                 </Button.FontFamily>
             </Button>
-            <Button x:Name="Terminate"  Clicked="OnTerminateClicked" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"  Text="&#xf3dd;" BorderColor="Transparent" BackgroundColor="Red" TextColor="White" FontSize="Medium">
+            <Button x:Name="Terminate"  Clicked="OnTerminateClicked" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2"  Text="&#xf095;" BorderColor="Transparent" BackgroundColor="Red" TextColor="White" FontSize="Large">
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" iOS="FontAwesome5FreeSolid" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
                 </Button.FontFamily>

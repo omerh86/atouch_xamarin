@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Linphone;
 using Plugin.MediaManager;
+using System.Runtime.CompilerServices;
 
 namespace LinphoneXamarin.Services
 {
@@ -12,17 +13,22 @@ namespace LinphoneXamarin.Services
 
         public List<MyCall> myCalls = new List<MyCall>();
 
+        public bool isSpeaker = false;
+        public bool isMute = false;
+        public bool isPaused = false;
+        public bool isConferenced = false;
+        public Call tr87Call;
+
         private static CallService instance = null;
         private static readonly object padlock = new object();
         private CallsListener callsListener;
         private Tr87stateListener tr87StateListener;
         private CallViewInitiater callViewInitiater;
 
-        public bool isSpeaker = false;
-        public bool isMute = false;
-        public bool isPaused = false;
-        public bool isConferenced = false;
-        public Call tr87Call;
+        //
+        private bool isCallStateReallyChanged = false;
+
+        //
         private Core LinphoneCore
         {
             get
@@ -53,12 +59,17 @@ namespace LinphoneXamarin.Services
                     this.firetr87Established();
                 }
             }
-            this.callViewInitiaterHandler(state);
             this.updateMycalls(lcall, state);
-            this.fireOnMycallsUpdated();
+            if (isCallStateReallyChanged)
+            {
+                this.callViewInitiaterHandler(state);
+                this.fireOnMycallsUpdated();
+            }
 
         }
 
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
         private void fireOnMycallsUpdated()
         {
             if (this.callsListener != null)
@@ -153,13 +164,28 @@ namespace LinphoneXamarin.Services
             if (relevantIndex > -1)
             {
                 if (state == CallState.Released)
+                {
                     myCalls.RemoveAt(relevantIndex);
+                    this.isCallStateReallyChanged = true;
+                }
                 else
-                    myCalls[relevantIndex].state = state;
+                {
+                    if (myCalls[relevantIndex].state == state)
+                    {
+                        isCallStateReallyChanged = true;
+                    }
+                    else
+                    {
+                        myCalls[relevantIndex].state = state;
+                        isCallStateReallyChanged = true;
+                    }
+                }
             }
             else
             {
-                myCalls.Add(new MyCall(call.ToAddress.Username, call.RemoteAddressAsString, state));
+                MyCall newCall = new MyCall(call.ToAddress.Username, call.RemoteAddressAsString, state);
+                myCalls.Add(newCall);
+                this.isCallStateReallyChanged = true;
             }
             setCurrentCall();
             setCurrentCallOnTop();

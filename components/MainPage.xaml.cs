@@ -39,17 +39,8 @@ namespace LinphoneXamarin.components
         {
 
             this.callsList = list;
-            this.callsList.ForEach(c =>
-            {
-                Console.WriteLine("omeriko", "" + c.alias);
-            });
-            this.BindingContext = callsList;
-            if (this.callsList.Count == 0)
-            {
-                // Navigation.RemovePage(this);
-                return;
-            }
 
+            this.BindingContext = callsList;
             this.setActionsStatus();
 
         }
@@ -63,7 +54,10 @@ namespace LinphoneXamarin.components
                     case CallState.IncomingReceived:
                         setAnswerMode();
                         break;
-                    default:
+                    case CallState.OutgoingRinging:
+                        setOutgoingMode();
+                        break;
+                    case CallState.StreamsRunning:
                         setStreamMode();
                         break;
                 }
@@ -114,15 +108,27 @@ namespace LinphoneXamarin.components
         private void setAnswerMode()
         {
             controlGrid.Children.Clear();
-            controlGrid.Children.Add(Answer, 1, 0);
-            controlGrid.Children.Add(Terminate, 2, 0);
+
+            controlGrid.Children.Add(Answer, 0, 2, 0, 2);
+            controlGrid.Children.Add(Terminate, 2, 4, 0, 2);
         }
 
         private void setStreamMode()
         {
+            controlGrid.Children.Clear();
             controlGrid.Children.Add(hold, 0, 0);
-            controlGrid.Children.Add(Answer, 1, 1);
-            controlGrid.Children.Add(Terminate, 2, 1);
+            controlGrid.Children.Add(conference, 1, 0);
+            controlGrid.Children.Add(speaker, 2, 0);
+            controlGrid.Children.Add(Terminate, 1, 3, 1, 2);
+            controlGrid.RowSpacing = 5;
+        }
+
+        private void setOutgoingMode()
+        {
+            controlGrid.Children.Clear();
+            controlGrid.Children.Add(speaker, 2, 0);
+            controlGrid.Children.Add(Terminate, 1, 3, 1, 2);
+            controlGrid.RowSpacing = 5;
         }
     }
 }
