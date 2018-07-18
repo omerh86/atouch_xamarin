@@ -3,27 +3,38 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LinphoneXamarin.components.userControllers.ContactCell">
     <ViewCell.View>
-        <StackLayout  VerticalOptions="Fill" HorizontalOptions="Fill" Orientation="Horizontal" >
-
-            <StackLayout  Orientation="Vertical" VerticalOptions="Fill" HorizontalOptions="StartAndExpand">
-                <Label FontSize="Medium" TextColor="DimGray" Text="{Binding displayName}"/>
-                <Label FontSize="Small" TextColor="DimGray" Text="{Binding alias}"/>
-              </StackLayout>
-            <StackLayout Orientation="Horizontal" VerticalOptions="Fill" HorizontalOptions="End">
-                <Button x:Name="favBtn" Clicked="onToggleContactFavStatus" Text="&#xf005;" BorderColor="Transparent" BackgroundColor="Transparent" TextColor="DimGray" FontSize="Medium">
-                    <Button.FontFamily>
-                        <OnPlatform x:TypeArguments="x:String" Android="fa-regular-400.ttf#Font Awesome 5 Free Regular" iOS="Font Awesome 5 Free" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
-                    </Button.FontFamily>
-                </Button>
-                <Button  Clicked="onCallClicked" Text="&#xf095;" BorderColor="Transparent" HorizontalOptions="Fill" BackgroundColor="Transparent" TextColor="DimGray" FontSize="Medium">
+        <StackLayout Orientation="Vertical">
+            <StackLayout VerticalOptions="Center" Margin="15" HorizontalOptions="Fill" Orientation="Horizontal" >
+                <Image HeightRequest="50" WidthRequest="50" Source="user.png" />
+                <StackLayout Margin="5"  Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
+                    <Label FontSize="Large" TextColor="Black" Text="{Binding displayName}"/>
+                    <Label FontSize="Small" TextColor="DimGray" Text="{Binding alias}"/>
+                </StackLayout>
+                <Button x:Name="settingsBtn" VerticalOptions="End" Clicked="onToggleActions" Text="&#xf142;" BorderColor="Transparent" BackgroundColor="Transparent" TextColor="DimGray" FontSize="Medium">
                     <Button.FontFamily>
                         <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" iOS="FontAwesome5FreeSolid" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
                     </Button.FontFamily>
                 </Button>
-                <!--<Button  Clicked="onCallClicked" FontSize="Small" Text="Call"/>-->
-                <!--<Button x:Name="favBtn" FontSize="Small" Clicked="onToggleContactFavStatus" Text="fav"/>-->
+
+            </StackLayout>
+
+            <StackLayout  x:Name="actionBar" VerticalOptions="Center" Margin="15" HorizontalOptions="FillAndExpand" Orientation="Horizontal" >
+                <Label  x:Name="favBtn" Margin="10" Text="&#xf005;" HorizontalOptions="Start"  BackgroundColor="Transparent" TextColor="DimGray" FontSize="Small">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String" Android="fa-regular-400.ttf#Font Awesome 5 Free Regular" iOS="Font Awesome 5 Free" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
+                    </Label.FontFamily>
+                </Label>
+                <Label x:Name="callBtn" Margin="10" Text="&#xf095;"  BackgroundColor="Transparent" TextColor="DimGray" FontSize="Small">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" iOS="FontAwesome5FreeSolid" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
+                    </Label.FontFamily>
+                </Label>
+                <Label x:Name="infoBtn" Margin="10"  Text="&#xf129;" HorizontalOptions="End" BackgroundColor="Transparent" TextColor="DimGray" FontSize="Small">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" iOS="FontAwesome5FreeSolid" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
+                    </Label.FontFamily>
+                </Label>
             </StackLayout>
         </StackLayout>
-
     </ViewCell.View>
 </ViewCell>

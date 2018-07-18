@@ -15,12 +15,28 @@ namespace LinphoneXamarin.components.userControllers
     {
         ContactService contactService;
         CallService callService;
+        bool isActionsBar = false;
 
         public ContactCell()
         {
             contactService = ContactService.Instance;
             callService = CallService.Instance;
             InitializeComponent();
+          
+            favBtn.GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                Command = new Command(() => onToggleContactFavStatus()),
+            });
+
+            callBtn.GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                Command = new Command(() => onCallClicked()),
+            });
+
+            infoBtn.GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                Command = new Command(() => onInfoClicked()),
+            });
         }
 
         public static readonly BindableProperty isFavProperty =
@@ -94,14 +110,25 @@ BindableProperty.Create("userName", typeof(string), typeof(ContactCell), "");
             set { SetValue(aliasProperty, value); }
         }
 
-        public void onToggleContactFavStatus(object sender, EventArgs e)
+        public void onToggleContactFavStatus()
         {
             this.isFav = contactService.toggleContactFavStatus(userName);
         }
 
-        public void onCallClicked(object sender, EventArgs e)
+        public void onCallClicked()
         {
             callService.call(alias.ToString());
+        }
+
+        public void onInfoClicked()
+        {
+            Console.WriteLine("On Info");
+        }
+
+        public void onToggleActions(object sender, EventArgs e)
+        {
+            isActionsBar = !isActionsBar;
+            actionBar.IsVisible = isActionsBar;
         }
 
 

@@ -16,8 +16,8 @@ namespace LinphoneXamarin.Services
         ContactService()
         {
 
-            allContacts.Add(new Contact("1", "Roi", 4007));
-            allContacts.Add(new Contact("2", "Yuval", 4008));
+            allContacts.Add(new Contact("1", "Roi", 2007));
+            allContacts.Add(new Contact("2", "Yuval", 2008));
             
         }
 
