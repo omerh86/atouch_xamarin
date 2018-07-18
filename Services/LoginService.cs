@@ -227,7 +227,8 @@ namespace LinphoneXamarin.Services
                     this.loginAeonix();
                     break;
                 case MyRegistrationState.InviteAeonix:
-                    CallService.Instance.makeTr87Call();
+                    //  CallService.Instance.makeTr87Call();
+                    onTr87Established();
                     break;
                 case MyRegistrationState.AfterAeonix:
                     fireLoginSuccsess();
