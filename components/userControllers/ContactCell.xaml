@@ -3,38 +3,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LinphoneXamarin.components.userControllers.ContactCell">
     <ViewCell.View>
-        <StackLayout Orientation="Vertical">
-            <StackLayout VerticalOptions="Center" Margin="15" HorizontalOptions="Fill" Orientation="Horizontal" >
+        <StackLayout  Orientation="Vertical" VerticalOptions="Center" >
+            <StackLayout x:Name="item" VerticalOptions="Center" Margin="15" HorizontalOptions="Fill" Orientation="Horizontal" >
                 <Image HeightRequest="50" WidthRequest="50" Source="user.png" />
                 <StackLayout Margin="5"  Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="StartAndExpand">
                     <Label FontSize="Large" TextColor="Black" Text="{Binding displayName}"/>
                     <Label FontSize="Small" TextColor="DimGray" Text="{Binding alias}"/>
                 </StackLayout>
-                <Button x:Name="settingsBtn" VerticalOptions="End" Clicked="onToggleActions" Text="&#xf142;" BorderColor="Transparent" BackgroundColor="Transparent" TextColor="DimGray" FontSize="Medium">
-                    <Button.FontFamily>
-                        <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" iOS="FontAwesome5FreeSolid" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
-                    </Button.FontFamily>
-                </Button>
-
+             
             </StackLayout>
 
-            <StackLayout  x:Name="actionBar" VerticalOptions="Center" Margin="15" HorizontalOptions="FillAndExpand" Orientation="Horizontal" >
-                <Label  x:Name="favBtn" Margin="10" Text="&#xf005;" HorizontalOptions="Start"  BackgroundColor="Transparent" TextColor="DimGray" FontSize="Small">
+
+            <Grid  x:Name="actionBar" IsVisible="False" RowSpacing="1" ColumnSpacing="5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                       </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0"  x:Name="favBtn"  Text="&#xf005;" HorizontalOptions="Center"  BackgroundColor="Transparent" TextColor="DimGray" FontSize="Small">
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String" Android="fa-regular-400.ttf#Font Awesome 5 Free Regular" iOS="Font Awesome 5 Free" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
                     </Label.FontFamily>
                 </Label>
-                <Label x:Name="callBtn" Margin="10" Text="&#xf095;"  BackgroundColor="Transparent" TextColor="DimGray" FontSize="Small">
+                <Label Grid.Row="0" Grid.Column="1" x:Name="callBtn" Text="&#xf095;" HorizontalOptions="Center"  BackgroundColor="Transparent" TextColor="DimGray" FontSize="Small">
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" iOS="FontAwesome5FreeSolid" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
                     </Label.FontFamily>
                 </Label>
-                <Label x:Name="infoBtn" Margin="10"  Text="&#xf129;" HorizontalOptions="End" BackgroundColor="Transparent" TextColor="DimGray" FontSize="Small">
+                <Label Grid.Row="0" Grid.Column="2" x:Name="infoBtn"  Text="&#xf129;" HorizontalOptions="Center" BackgroundColor="Transparent" TextColor="DimGray" FontSize="Small">
                     <Label.FontFamily>
                         <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" iOS="FontAwesome5FreeSolid" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
                     </Label.FontFamily>
                 </Label>
-            </StackLayout>
+            </Grid>
         </StackLayout>
     </ViewCell.View>
 </ViewCell>

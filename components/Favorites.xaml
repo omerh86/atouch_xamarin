@@ -10,7 +10,7 @@
         <control:MySearch x:Name="search" Command="{Binding} " />
 
         <StackLayout VerticalOptions="FillAndExpand" >
-            <ListView RowHeight="100" x:Name="favorites" ItemsSource="{Binding}">
+            <ListView RowHeight="150" x:Name="favorites" ItemsSource="{Binding}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <control:ContactCell isFav="{Binding isFav}" userName="{Binding userName}" displayName="{Binding displayName}" alias="{Binding alias}" />

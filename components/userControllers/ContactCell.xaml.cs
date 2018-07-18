@@ -37,6 +37,12 @@ namespace LinphoneXamarin.components.userControllers
             {
                 Command = new Command(() => onInfoClicked()),
             });
+
+            item.GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                Command = new Command(() => onToggleActions()),
+            });
+
         }
 
         public static readonly BindableProperty isFavProperty =
@@ -125,7 +131,7 @@ BindableProperty.Create("userName", typeof(string), typeof(ContactCell), "");
             Console.WriteLine("On Info");
         }
 
-        public void onToggleActions(object sender, EventArgs e)
+        public void onToggleActions()
         {
             isActionsBar = !isActionsBar;
             actionBar.IsVisible = isActionsBar;
