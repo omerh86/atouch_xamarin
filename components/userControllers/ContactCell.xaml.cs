@@ -38,10 +38,10 @@ namespace LinphoneXamarin.components.userControllers
                 Command = new Command(() => onInfoClicked()),
             });
 
-            item.GestureRecognizers.Add(new TapGestureRecognizer
-            {
-                Command = new Command(() => onToggleActions()),
-            });
+            //item.GestureRecognizers.Add(new TapGestureRecognizer
+            //{
+            //    Command = new Command(() => onToggleActions()),
+            //});
 
         }
 
@@ -80,7 +80,7 @@ BindableProperty.Create("isFav", typeof(bool), typeof(ContactCell), false);
                 favBtn.TextColor = Color.DarkGoldenrod;
             else
             {
-                favBtn.BackgroundColor = Color.DimGray;
+                favBtn.TextColor = Color.DimGray;
             }
         }
 
@@ -131,7 +131,13 @@ BindableProperty.Create("userName", typeof(string), typeof(ContactCell), "");
             Console.WriteLine("On Info");
         }
 
-        public void onToggleActions()
+        //public void onToggleActions()
+        //{
+        //    isActionsBar = !isActionsBar;
+        //    actionBar.IsVisible = isActionsBar;
+        //}
+
+        void onToggleActions(object sender, EventArgs args)
         {
             isActionsBar = !isActionsBar;
             actionBar.IsVisible = isActionsBar;
