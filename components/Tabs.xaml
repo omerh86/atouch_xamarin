@@ -8,7 +8,7 @@
     <pages:ContactTabbedPage Icon="contact.png" />
     <pages:DialPad Icon="dialpad.png" />
     <pages:Messages Icon="chat.png" />
-    <pages:MainPage Icon="voicemail.png" />
+    <!--<pages:MainPage Icon="voicemail.png" />-->
     
     
 </TabbedPage>

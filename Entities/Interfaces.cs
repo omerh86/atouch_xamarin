@@ -39,6 +39,7 @@ namespace LinphoneXamarin.Entities
     public interface CallViewInitiater
     {
         void onInitiateCallView();
+        void onDestroyCallView();
     }
 
 }

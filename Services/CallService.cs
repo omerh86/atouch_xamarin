@@ -69,10 +69,18 @@ namespace LinphoneXamarin.Services
 
         private void callViewInitiaterHandler(CallState state)
         {
-            if (myCalls.Count == 0 && callViewInitiater != null)
+            if (callViewInitiater != null)
             {
-                callViewInitiater.onInitiateCallView();
+                if (LinphoneCore.CallsNb > 0)
+                    callViewInitiater.onInitiateCallView();
+                else
+                {
+                    callViewInitiater.onDestroyCallView();
+
+                }
+
             }
+
 
         }
 
