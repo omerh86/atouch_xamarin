@@ -41,6 +41,7 @@ namespace LinphoneXamarin.components
 
         }
 
+      
         private void setActionsStatus()
         {
             if (callsList.Count > 0 && callsList[0] != null)

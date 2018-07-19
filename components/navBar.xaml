@@ -3,13 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 x:Class="LinphoneXamarin.components.navBar"
              xmlns:pages="clr-namespace:LinphoneXamarin.components">
+    
     <MasterDetailPage.Master>
-        <pages:navBarMaster x:Name="MasterPage" />
+        <pages:navBarMaster x:Name="MasterPage"  />
     </MasterDetailPage.Master>
+
     <MasterDetailPage.Detail>
-        <NavigationPage >
+        <NavigationPage>
             <x:Arguments>
-                <pages:Tabs />
+               <pages:Tabs />
             </x:Arguments>
         </NavigationPage>
     </MasterDetailPage.Detail>

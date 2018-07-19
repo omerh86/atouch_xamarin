@@ -17,6 +17,8 @@ namespace LinphoneXamarin.components
     {
         RegistrationService registrationService;
         private bool isCallView = false;
+        private bool isCallActive = false;
+        ToolbarItem returnToCallBtn;
 
 
         public navBar()
@@ -24,6 +26,7 @@ namespace LinphoneXamarin.components
             registrationService = RegistrationService.Instance;
             InitializeComponent();
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;
+
         }
 
         protected override void OnAppearing()
@@ -31,22 +34,62 @@ namespace LinphoneXamarin.components
             base.OnAppearing();
             CallService.Instance.setCallsViewInitiater(this);
             registrationService.setRegistrationListener(this);
+            returnToCallBtn = new ToolbarItem
+            {
+                Icon = "call.png",
+                Command = new Command(this.returnToCallAction),
+            };
+        }
+
+        private void goToCallView()
+        {
+            var page = (Page)new MainPage();
+            page.Disappearing += (sender, e) =>
+            {
+                if (isCallActive)
+                {
+                    this.ToolbarItems.Add(returnToCallBtn);
+                }
+                else
+                {
+                    this.ToolbarItems.Remove(returnToCallBtn);
+                }
+            };
+
+            page.Appearing += (sender, e) =>
+            {
+                this.ToolbarItems.Remove(returnToCallBtn);
+            };
+
+            Detail.Navigation.PushAsync(page);
+        }
+
+        private void returnToCallAction()
+        {
+            goToCallView();
         }
 
         public void onInitiateCallView()
         {
+            isCallActive = true;
+
             if (!this.isCallView)
             {
-                Detail.Navigation.PushAsync(new MainPage());
+                goToCallView();
                 isCallView = true;
+
             }
         }
 
+
         public void onDestroyCallView()
         {
+            isCallActive = false;
+            this.ToolbarItems.Remove(returnToCallBtn);
             if (this.isCallView)
             {
                 Detail.Navigation.PopAsync();
+
                 this.isCallView = false;
             }
         }
@@ -61,7 +104,7 @@ namespace LinphoneXamarin.components
             }
         }
 
-      
+
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
