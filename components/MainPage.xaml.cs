@@ -33,14 +33,10 @@ namespace LinphoneXamarin.components
 
         }
 
-
-
         public void onListUpdated(List<MyCall> list)
         {
-
             this.callsList = list;
-
-            this.BindingContext = callsList;
+            //this.BindingContext = callsList;
             this.setActionsStatus();
 
         }
@@ -49,6 +45,7 @@ namespace LinphoneXamarin.components
         {
             if (callsList.Count > 0 && callsList[0] != null)
             {
+                this.BindingContext = callsList[0];
                 switch (callsList[0].state)
                 {
                     case CallState.IncomingReceived:
@@ -61,11 +58,12 @@ namespace LinphoneXamarin.components
                         setStreamMode();
                         break;
                 }
+
             }
-            //if (callService.isPaused)
-            //    hold.BackgroundColor = Color.Aqua;
-            //else
-            //    hold.BackgroundColor = Color.Transparent;
+            if (callService.isPaused)
+                hold.TextColor = Color.AliceBlue;
+            else
+                hold.TextColor = Color.DimGray;
 
         }
 
@@ -119,16 +117,16 @@ namespace LinphoneXamarin.components
             controlGrid.Children.Add(hold, 0, 0);
             controlGrid.Children.Add(conference, 1, 0);
             controlGrid.Children.Add(speaker, 2, 0);
+            controlGrid.Children.Add(settings, 3, 0);
             controlGrid.Children.Add(Terminate, 1, 3, 1, 2);
-            controlGrid.RowSpacing = 5;
+            controlGrid.RowSpacing = 20;
         }
 
         private void setOutgoingMode()
         {
             controlGrid.Children.Clear();
-            controlGrid.Children.Add(speaker, 2, 0);
             controlGrid.Children.Add(Terminate, 1, 3, 1, 2);
-            controlGrid.RowSpacing = 5;
+            controlGrid.RowSpacing = 20;
         }
     }
 }

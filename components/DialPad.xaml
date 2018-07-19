@@ -12,24 +12,25 @@
                 <Setter Property="BorderRadius" Value="0" />
                 <Setter Property="FontSize" Value="Small" />
             </Style>
+            <Style x:Key="blueButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#d0d0d0" />
+                <Setter Property="TextColor" Value="Black" />
+                <Setter Property="BorderRadius" Value="0" />
+                <Setter Property="FontSize" Value="Small" />
+            </Style>
             <Style x:Key="greenButton" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="Green" />
+                <Setter Property="BackgroundColor" Value="#4CED4C" />
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="BorderRadius" Value="0" />
                 <Setter Property="FontSize" Value="Medium" />
             </Style>
-            <Style x:Key="blueButton" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="#00688f" />
-                <Setter Property="TextColor" Value="White" />
-                <Setter Property="BorderRadius" Value="0" />
-                <Setter Property="FontSize" Value="Small" />
-            </Style>
+
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout Orientation="Vertical" VerticalOptions="End" HorizontalOptions="FillAndExpand">
             <StackLayout Padding="10 " BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <Label YAlign="Center" HorizontalOptions="StartAndExpand" Text="{Binding}" />
+                <Label x:Name="number" YAlign="Center" HorizontalOptions="StartAndExpand" FontSize="Large" TextColor="Black" Text="{Binding}"/>
                 <Button Clicked="clear" Text="&#xf55a;" BorderColor="Transparent" BackgroundColor="Transparent" TextColor="DimGray" FontSize="Medium">
                     <Button.FontFamily>
                         <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" iOS="FontAwesome5FreeSolid" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
@@ -37,20 +38,20 @@
                 </Button>
                 <!--<Button  Text="Clear" HorizontalOptions="End" Clicked="clear" />-->
             </StackLayout>
-            <Grid  x:Name="controlGrid" RowSpacing="1" ColumnSpacing="1">
+            <Grid Margin="5"  x:Name="controlGrid" RowSpacing="1" ColumnSpacing="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="60" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                
+
                 <Button Clicked="onDialPadClicked" Text="1" Grid.Row="0" Grid.Column="0" Style="{StaticResource plainButton}" />
                 <Button Clicked="onDialPadClicked" Text="2" Grid.Row="0" Grid.Column="1" Style="{StaticResource blueButton}" />
                 <Button Clicked="onDialPadClicked" Text="3" Grid.Row="0" Grid.Column="2" Style="{StaticResource plainButton}" />

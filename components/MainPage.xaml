@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" Title="" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:LinphoneXamarin" x:Class="LinphoneXamarin.components.MainPage">
     <StackLayout x:Name="stack_layout" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="15">
 
-        <ListView x:Name="calls" ItemTapped="setCurrentCall" ItemsSource="{Binding}">
+        <!--<ListView x:Name="calls" ItemTapped="setCurrentCall" ItemsSource="{Binding}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -12,17 +12,12 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
-
-        <!--<Button x:Name="Answer" Text="Answer" Clicked="OnAnswerClicked" HorizontalOptions="Center" />
-        <Button x:Name="Terminate" Text="Terminate" Clicked="OnTerminateClicked" HorizontalOptions="Center" />
-        <Button x:Name="hold" BackgroundColor="Transparent" Text="hold" Clicked="OnHoldClicked" HorizontalOptions="Center" />
-        <Button Text="Conference" Clicked="onConferenceCalls" HorizontalOptions="Center" />
-        <Button Text="speaker" Clicked="onToggleSpeakerAsync" HorizontalOptions="Center" />-->
-
-        <Grid Margin="20" VerticalOptions="End" x:Name="controlGrid" RowSpacing="3" ColumnSpacing="3">
+        </ListView>-->
+        <Image HeightRequest="100" WidthRequest="100" Source="user.png" HorizontalOptions="Center" Margin="15" />
+        <Label FontSize="Large" TextColor="Black" HorizontalOptions="Center" VerticalOptions="FillAndExpand" Text="{Binding alias}"/>
+        <Grid Margin="20" VerticalOptions="End" x:Name="controlGrid" RowSpacing="20" ColumnSpacing="3">
             <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
+                <RowDefinition Height="60" />
                 <RowDefinition Height="*" />
 
             </Grid.RowDefinitions>
@@ -39,7 +34,7 @@
                     <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" iOS="FontAwesome5FreeSolid" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
                 </Button.FontFamily>
             </Button>
-            <Button x:Name="conference" IsEnabled="False" Clicked="onConferenceCalls" Grid.Row="0" Grid.Column="1" Text="&#xf55a;" BorderColor="Transparent" BackgroundColor="Transparent" TextColor="DimGray" FontSize="Large" >
+            <Button x:Name="conference" IsEnabled="False" Clicked="onConferenceCalls" Grid.Row="0" Grid.Column="1" Text="&#xf066;" BorderColor="Transparent" BackgroundColor="Transparent" TextColor="DimGray" FontSize="Large" >
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" iOS="FontAwesome5FreeSolid" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
                 </Button.FontFamily>
@@ -49,6 +44,13 @@
                     <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" iOS="FontAwesome5FreeSolid" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
                 </Button.FontFamily>
             </Button>
+
+            <Button  x:Name="settings" IsEnabled="False" Text="&#xf0c9;" BorderColor="Transparent" BackgroundColor="Transparent" TextColor="DimGray" FontSize="Large"  >
+                <Button.FontFamily>
+                    <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" iOS="FontAwesome5FreeSolid" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
+                </Button.FontFamily>
+            </Button>
+
             <Button x:Name="Answer"  Clicked="OnAnswerClicked" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"   Text="&#xf095;" BorderColor="Transparent" BackgroundColor="Green" TextColor="White" FontSize="Large" >
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" iOS="FontAwesome5FreeSolid" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />

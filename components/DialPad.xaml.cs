@@ -5,8 +5,8 @@ using Xamarin.Forms;
 
 namespace LinphoneXamarin.components
 {
-	
-	public partial class DialPad : ContentPage
+
+    public partial class DialPad : ContentPage
     {
         string phoneNumber = "";
         public DialPad()
@@ -18,7 +18,12 @@ namespace LinphoneXamarin.components
         private void onDialPadClicked(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
-            phoneNumber += btn.Text;
+            if (phoneNumber.Length == 0)
+                phoneNumber = btn.Text;
+            else
+            {
+                phoneNumber=phoneNumber.Insert(phoneNumber.Length, btn.Text);
+            }
             this.BindingContext = phoneNumber;
         }
 
