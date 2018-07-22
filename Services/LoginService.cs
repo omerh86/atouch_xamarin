@@ -173,6 +173,7 @@ namespace LinphoneXamarin.Services
             switch (state)
             {
                 case RegistrationState.Ok:
+                    if(registrationProcess.CurrentState==MyRegistrationState.ConnectingAeonix|| registrationProcess.CurrentState == MyRegistrationState.DisconnectingTR87)
                     registrationProcess.MoveNext(Command.Continue);
                     break;
                 case RegistrationState.Failed:
@@ -182,6 +183,10 @@ namespace LinphoneXamarin.Services
                     {
                         case "Unauthorized":
                             resetLoginProccesss(true, LoginError.RegistrationFailed);
+                            break;
+                        case "Request Terminated":
+                            // I believe it means that we are logged in allready
+                            registrationProcess.MoveNext(Command.End);
                             break;
                         default:
                             resetLoginProccesss(true, LoginError.RegistrationFailed);
@@ -247,7 +252,8 @@ namespace LinphoneXamarin.Services
             StartAll,
             StartAeonix,
             Continue,
-            Clear
+            Clear,
+            End
 
         }
 
@@ -300,7 +306,14 @@ namespace LinphoneXamarin.Services
                 { new StateTransition(MyRegistrationState.DisconnectingTR87, Command.Clear), MyRegistrationState.BeforeTR87},
                 { new StateTransition(MyRegistrationState.ConnectingAeonix, Command.Clear), MyRegistrationState.BeforeTR87},
                 { new StateTransition(MyRegistrationState.InviteAeonix, Command.Clear), MyRegistrationState.BeforeTR87},
-                { new StateTransition(MyRegistrationState.AfterAeonix, Command.Clear), MyRegistrationState.BeforeTR87}
+                { new StateTransition(MyRegistrationState.AfterAeonix, Command.Clear), MyRegistrationState.BeforeTR87},
+                 { new StateTransition(MyRegistrationState.BeforeTR87, Command.End), MyRegistrationState.AfterAeonix},
+                { new StateTransition(MyRegistrationState.ConnectingTR87, Command.End), MyRegistrationState.AfterAeonix},
+                { new StateTransition(MyRegistrationState.GetingInfo, Command.End), MyRegistrationState.AfterAeonix},
+                { new StateTransition(MyRegistrationState.DisconnectingTR87, Command.End), MyRegistrationState.AfterAeonix},
+                { new StateTransition(MyRegistrationState.ConnectingAeonix, Command.End), MyRegistrationState.AfterAeonix},
+                { new StateTransition(MyRegistrationState.InviteAeonix, Command.End), MyRegistrationState.AfterAeonix},
+                { new StateTransition(MyRegistrationState.AfterAeonix, Command.End), MyRegistrationState.AfterAeonix}
             };
             }
 

@@ -35,7 +35,7 @@ namespace LinphoneXamarin
             LinphoneCore = Factory.Instance.CreateCore(listener, rc_path, null);
             coreListener= Factory.Instance.CreateCoreListener();
             setLinphoneSettings();
-
+            
              MainPage = new NavigationPage(new components.Login());
          //   MainPage = new components.navBar();
             // MainPage = new components.Login();

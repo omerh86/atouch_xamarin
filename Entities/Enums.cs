@@ -16,6 +16,7 @@ namespace LinphoneXamarin.Entities
         TimeOut,
         RestartLogin,
         RegistrationFailed,
+        RequestTerminated,
         InfoFailed,
         None
     }
