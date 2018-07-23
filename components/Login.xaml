@@ -5,14 +5,16 @@
              x:Class="LinphoneXamarin.components.Login">
     <StackLayout x:Name="stack_layout" VerticalOptions="FillAndExpand"
                  HorizontalOptions="FillAndExpand" Orientation="Vertical"  Spacing="15">
-        <Label Margin="10" Text="Welcome to Aeonix Touch !" FontSize="Large" TextColor="Black" HorizontalOptions="Center" />
+      
         <StackLayout VerticalOptions="Center" x:Name="stack_registrar">
+        <Label Margin="10" Text="Welcome to Aeonix Touch !" FontSize="Large" TextColor="Black" HorizontalOptions="Center" />
             <Entry Margin="8" x:Name="username" Placeholder="Username" />
             <Entry Margin="8" x:Name="password" Placeholder="Password" IsPassword="true"  />
             <Entry Margin="8" x:Name="domain" Placeholder="Address"  />
             <!--<Button x:Name="register" Text="Register" Clicked="OnRegisterClicked" HorizontalOptions="Center" />-->
-            <Button BackgroundColor="#00688f" TextColor="White" BorderRadius="25" x:Name="register2" Text="Login" Clicked="OnRegisterClicked2" HorizontalOptions="Center" />
-            <Button  x:Name="Send" Text="send" IsVisible="False" Clicked="OnsendRequest" HorizontalOptions="Center" />
+            <Button BackgroundColor="#00688f" TextColor="White" BorderRadius="25" x:Name="register2" Text="Login" Clicked="OnRegisterClicked" HorizontalOptions="Center" />
+            <Button BackgroundColor="#00688f" TextColor="White" BorderRadius="25" x:Name="populatecardentials" Text="Auto Login" Clicked="onAutoLogin" HorizontalOptions="Center" />
+           <Button  Text="send token"  Clicked="OnSendToken" HorizontalOptions="Center" />
             <Label x:Name="registration_status" HorizontalOptions="Center" />
         </StackLayout>
     </StackLayout>

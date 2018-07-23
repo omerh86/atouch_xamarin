@@ -38,10 +38,14 @@ namespace LinphoneXamarin.Util
             }
         }
 
-        public void saveLoginCardential(LoginInfo loginInfo,CardentialState cardentialState)
+        public void saveLoginCardential(LoginInfo loginInfo, CardentialState cardentialState)
         {
-            string s = objToJson<LoginInfo>(loginInfo);
-            string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), cardentialState==CardentialState.TR87? LOGIN_CARDENTIAL_TR87:LOGIN_CARDENTIAL_AEONIX);
+            string s = "";
+            if (loginInfo != null)
+            {
+                s = objToJson<LoginInfo>(loginInfo);
+            }
+            string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), cardentialState == CardentialState.TR87 ? LOGIN_CARDENTIAL_TR87 : LOGIN_CARDENTIAL_AEONIX);
             File.WriteAllText(fileName, s);
 
         }
@@ -54,7 +58,7 @@ namespace LinphoneXamarin.Util
                 return null;
             }
             string s = File.ReadAllText(fileName);
-            if (s != null && s.Length > 0)
+            if (s != null && s!= "")
             {
                 LoginInfo loginInfo = jsonToObj<LoginInfo>(s);
                 return loginInfo;

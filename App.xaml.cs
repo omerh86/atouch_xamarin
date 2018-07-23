@@ -8,6 +8,8 @@ using Linphone;
 using System.Net;
 using System.IO;
 using System.Reflection;
+using LinphoneXamarin.Util;
+using LinphoneXamarin.Entities;
 #if WINDOWS_UWP
 using System.Diagnostics;
 using Windows.System.Threading;
@@ -19,7 +21,7 @@ namespace LinphoneXamarin
 {
     public partial class App : Application
     {
-      
+
         public Core LinphoneCore { get; set; }
         public CoreListener coreListener { get; set; }
 
@@ -28,25 +30,17 @@ namespace LinphoneXamarin
         {
 
             LinphoneWrapper.setNativeLogHandler();
-            
+
             Core.SetLogLevelMask(0xFF);
             CoreListener listener = Factory.Instance.CreateCoreListener();
             listener.OnGlobalStateChanged = OnGlobal;
             LinphoneCore = Factory.Instance.CreateCore(listener, rc_path, null);
-            coreListener= Factory.Instance.CreateCoreListener();
+            coreListener = Factory.Instance.CreateCoreListener();
             setLinphoneSettings();
-            
-             MainPage = new NavigationPage(new components.Login());
-         //   MainPage = new components.navBar();
-            // MainPage = new components.Login();
-            MainPage.Title = "Aeonix";
-            var settings = new ToolbarItem
-            {
-                Icon = "icon.png",
-                Command = new Command(this.ShowSettingsPage),
-            };
-            MainPage.ToolbarItems.Add(settings);
-            
+
+            MainPage = new NavigationPage(new components.Login());
+
+
         }
 
         private void ShowSettingsPage()

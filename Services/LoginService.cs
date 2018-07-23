@@ -132,7 +132,6 @@ namespace LinphoneXamarin.Services
 
         private void loginAeonix()
         {
-            MyFileSystem.Instance.saveLoginCardential(new LoginInfo("2006A0D3C10DE55B", "A7nhe~6", "172.28.11.141"), CardentialState.Aeonix);
             LoginInfo loginInfo = MyFileSystem.Instance.loadLoginCardential(CardentialState.Aeonix);
             if (loginInfo != null)
             {
@@ -173,8 +172,8 @@ namespace LinphoneXamarin.Services
             switch (state)
             {
                 case RegistrationState.Ok:
-                    if(registrationProcess.CurrentState==MyRegistrationState.ConnectingAeonix|| registrationProcess.CurrentState == MyRegistrationState.DisconnectingTR87)
-                    registrationProcess.MoveNext(Command.Continue);
+                    if (registrationProcess.CurrentState == MyRegistrationState.ConnectingAeonix || registrationProcess.CurrentState == MyRegistrationState.DisconnectingTR87)
+                        registrationProcess.MoveNext(Command.Continue);
                     break;
                 case RegistrationState.Failed:
                 case RegistrationState.Cleared:
@@ -232,7 +231,7 @@ namespace LinphoneXamarin.Services
                     this.loginAeonix();
                     break;
                 case MyRegistrationState.InviteAeonix:
-                    //  CallService.Instance.makeTr87Call();
+                      CallService.Instance.makeTr87Call();
                     onTr87Established();
                     break;
                 case MyRegistrationState.AfterAeonix:

@@ -24,65 +24,64 @@ namespace LinphoneXamarin.components
         protected override void OnAppearing()
         {
             base.OnAppearing();
+
+            LoginInfo aeonixLoginInfo = MyFileSystem.Instance.loadLoginCardential(CardentialState.Aeonix);
+            if (aeonixLoginInfo != null)
+            {
+                doLogin(false);
+                stack_registrar.IsVisible = false;
+            }
+            else
+            {
+                this.populateLoginFields();
+            }
+
+            loginService.setLoginRegistrationListener(this);
+        }
+
+
+
+        private void populateLoginFields()
+        {
             LoginInfo loginInfo = loginService.getTr87Cardential();
-           
+
             if (loginInfo != null)
             {
                 username.Text = loginInfo.name;
                 password.Text = loginInfo.password;
                 domain.Text = loginInfo.ip;
             }
-            if (loginService.isRegistered())
-                registration_status.Text = "All ready LoggedIn";
+        }
 
-            loginService.setLoginRegistrationListener(this);
+        private void onAutoLogin(object sender, EventArgs e)
+        {
+
+              MyFileSystem.Instance.saveLoginCardential(new LoginInfo("U4002ecc359351475676a", "Po-570w", "172.28.10.127"), CardentialState.Aeonix);
+            //MyFileSystem.Instance.saveLoginCardential(new LoginInfo("2006A0D3C10DE55B", "A7nhe~6", "172.28.11.141"), CardentialState.Aeonix);
+            doLogin(false);
         }
 
         private void OnRegisterClicked(object sender, EventArgs e)
         {
-           
+
             LoginInfo loginInfo = new LoginInfo(username.Text, password.Text, domain.Text);
             loginService.saveTr87Cardential(loginInfo);
             registration_status.Text = "Progress";
-            loginService.login(true);
+            doLogin(false);
         }
 
-        private void OnRegisterClicked2(object sender, EventArgs e)
+        private void doLogin(bool isIncludeTr87)
         {
-            
-            LoginInfo loginInfo = new LoginInfo(username.Text, password.Text, domain.Text);
-            loginService.saveTr87Cardential(loginInfo);
-            registration_status.Text = "Progress";
-            loginService.login(false);
+            loginService.login(isIncludeTr87);
         }
 
-        public struct GetConnectionRequest
+
+        private void OnSendToken(object sender, EventArgs e)
         {
-            public GetConnectionProp GetConnection;
+            string token = "fqyJf8zKpNo:APA91bFklY9PmYzmX1_rwT5Cg-6tpztSI4vRhWcZnIpB4n-npTLRN43PsE-q6b2IBqGuaD8Qixc7KhX6CiVwuaC4z2m8iqFcL_YfWFtz4F5KlfwMaR3ZzU2mH2eqWlYBbhZYI4sMzHCSqW8Ng1lbAJ-Zo_6CiMFOKA";
+            string strToSend = MySendRequestHelper.Instance.getConnectionRequest(new MySendRequestHelper.ConnectionProp(token));
+            AeonixInfoService.Instance.sendToInfoAeonix(strToSend);
 
-            public GetConnectionRequest(GetConnectionProp p)
-            {
-                GetConnection = p;
-            }
-        }
-
-        public struct GetConnectionProp
-        {
-            public string userName, deviceId;
-
-            public GetConnectionProp(string a, string b)
-            {
-                userName = a;
-                deviceId = b;
-            }
-        }
-
-        private void OnsendRequest(object sender, EventArgs e)
-        {
-            GetConnectionProp getConnectionProp = new GetConnectionProp("4050", "4050A0D3C10DE55B");
-            GetConnectionRequest getConnection = new GetConnectionRequest(getConnectionProp);
-            string s = MyFileSystem.Instance.objToJson<GetConnectionRequest>(getConnection);
-            AeonixInfoService.Instance.sendToInfoAeonix(s);
         }
 
 
@@ -90,8 +89,10 @@ namespace LinphoneXamarin.components
         {
             Device.BeginInvokeOnMainThread(() =>
             {
+                stack_registrar.IsVisible = true;
                 registration_status.Text = "Failed";
-                Send.IsVisible = false;
+                this.populateLoginFields();
+               
             });
 
         }
@@ -101,10 +102,8 @@ namespace LinphoneXamarin.components
             Device.BeginInvokeOnMainThread(() =>
             {
                 registration_status.Text = "Succsses";
-                // Send.IsVisible = true;
-                // Navigation.PushAsync(new Tabs());
-                // Navigation.RemovePage(this);
-                ((App)App.Current).MainPage = new components.navBar();
+                stack_registrar.IsVisible = true;
+                //((App)App.Current).MainPage = new components.navBar();
             });
         }
     }

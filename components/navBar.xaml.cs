@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Linphone;
 using LinphoneXamarin.Entities;
 using LinphoneXamarin.Services;
-
+using LinphoneXamarin.Util;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -113,6 +113,7 @@ namespace LinphoneXamarin.components
                 return;
             if (item.Id == 3)
             {
+                MyFileSystem.Instance.saveLoginCardential(null, CardentialState.Aeonix);
                 RegistrationService.Instance.unRegister();
                 return;
             }
