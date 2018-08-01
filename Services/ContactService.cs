@@ -3,22 +3,24 @@ using LinphoneXamarin.Entities;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Linphone;
+using System.Threading.Tasks;
+
 namespace LinphoneXamarin.Services
 {
     public sealed class ContactService
     {
 
         public List<Contact> allContacts = new List<Contact>();
-        private FavListener favListener;
+      private FavListener favListener;
         private static ContactService instance = null;
         private static readonly object padlock = new object();
 
         ContactService()
         {
 
-            allContacts.Add(new Contact("1", "Roi", 2007));
-            allContacts.Add(new Contact("2", "Yuval", 2008));
-            
+            allContacts.Add(new Contact("1", "Roi", "2007",true));
+            allContacts.Add(new Contact("2", "Yuval", "2008",true));
+            phoneContactsAsync();
         }
 
         public static ContactService Instance
@@ -87,6 +89,23 @@ namespace LinphoneXamarin.Services
             this.favListener = favListener;
         }
 
+
+        private async Task phoneContactsAsync()
+        {
+            try
+            {
+                var contacts = await Plugin.ContactService.CrossContactService.Current.GetContactListAsync();
+                Console.WriteLine("omer40: " + contacts);
+                foreach (var contact in contacts)
+                {
+                    this.allContacts.Add(new Contact(contact.Name, contact.Name, contact.Number,false));
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("omer40: " + e);
+            }
+        }
 
 
     }

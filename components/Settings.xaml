@@ -3,10 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LinphoneXamarin.components.Settings">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Orientation="Vertical">
             <Label Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            
+            <Button  Text="Send token (Amir`s special Button)"  Clicked="OnSendToken" HorizontalOptions="Center" />
+            <Button  Text="getPic"  Clicked="getPic" HorizontalOptions="Center" />
+            <Button  Text="NextResponseRequest"  Clicked="NextResponseRequest" HorizontalOptions="Center" />
+            <Button  Text="CreateAccountRequest"  Clicked="CreateAccountRequest" HorizontalOptions="Center" />
+            <Button  Text="GetRsUserRequest"  Clicked="GetRsUserRequest" HorizontalOptions="Center" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

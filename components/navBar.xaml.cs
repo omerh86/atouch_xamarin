@@ -32,6 +32,7 @@ namespace LinphoneXamarin.components
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            Console.WriteLine("omer40: " + "on nav bar appearing");
             CallService.Instance.setCallsViewInitiater(this);
             registrationService.setRegistrationListener(this);
             returnToCallBtn = new ToolbarItem

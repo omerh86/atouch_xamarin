@@ -67,6 +67,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Entities\LoginInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Contact.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LinphoneWrapper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\aeonixInfoRepository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\aeonixInfoService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ContactService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\CallService.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)components\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Services\LinphoneBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\LoginService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\RegistrationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Interfaces.cs" />
@@ -92,6 +94,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)components\CallLog.xaml.cs">
       <DependentUpon>CallLog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Services\SharedData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Util\MySendRequestHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Util\MyFileSystem.cs" />
   </ItemGroup>

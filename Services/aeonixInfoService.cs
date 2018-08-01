@@ -11,43 +11,11 @@ namespace LinphoneXamarin.Services
         private static AeonixInfoService instance = null;
         private static readonly object padlock = new object();
 
-        private Core LinphoneCore
-        {
-            get
-            {
-                return ((App)App.Current).LinphoneCore;
-            }
-        }
-
-        private void OnInfoRecived(Core lc, Call call, InfoMessage msg)
-        {
-            Console.WriteLine("omer40" + msg.ToString());
-           
-        }
-
-        private void onNotifyReceived(Core lc, Object ev, string eventName, Object content)
-        {
-            Console.WriteLine("omer40" + eventName.ToString());
-        }
-
-        private void globalState(Core lc, GlobalState state, String message)
-        {
-            Console.WriteLine("omer40" + message.ToString());
-        }
-
-       
-
-
-        private CoreListener Listener;
-
+    
         AeonixInfoService()
         {
-            Listener = ((App)App.Current).coreListener;
-            Listener.OnInfoReceived = OnInfoRecived;
-            Listener.OnNotifyReceived = onNotifyReceived;
-            Listener.OnGlobalStateChanged = globalState;
-            LinphoneCore.AddListener(Listener);
-          }
+          
+        }
 
         public static AeonixInfoService Instance
         {
@@ -64,32 +32,66 @@ namespace LinphoneXamarin.Services
             }
         }
 
-        public void sendToInfoAeonix(string info)
+
+        public class InfoProcess
+
         {
-            Call call = CallService.Instance.tr87Call;
-            string sendInfo = info + "\r\n";
+            class StateTransition
+            {
+                readonly MyInfoProcessState CurrentState;
+                readonly MyInfoProcessCommands Command;
 
-            InfoMessage infoMessage = LinphoneCore.CreateInfoMessage();
-            infoMessage.AddHeader("Content-Disposition", "signal; handling=required");
-            infoMessage.AddHeader("Content-Type", "application/csta+v6+json");
 
-            Content content = LinphoneCore.CreateContent();
-            content.Type = "application";
-            content.Subtype = "csta+v6+json";
-            System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
-            byte[] sendInfoBytes = encoding.GetBytes(sendInfo);
-            IntPtr unmanagedPointer = System.Runtime.InteropServices.Marshal.AllocHGlobal(sendInfoBytes.Length);
-            System.Runtime.InteropServices.Marshal.Copy(sendInfoBytes, 0, unmanagedPointer, sendInfoBytes.Length);
-            content.SetBuffer(unmanagedPointer, sendInfoBytes.Length);
+                public StateTransition(MyInfoProcessState currentState, MyInfoProcessCommands command)
+                {
+                    CurrentState = currentState;
+                    Command = command;
+                }
 
-            // Call unmanaged code
-            System.Runtime.InteropServices.Marshal.FreeHGlobal(unmanagedPointer);
-            infoMessage.Content = content;
+                public override int GetHashCode()
+                {
+                    return 17 + 31 * CurrentState.GetHashCode() + 31 * Command.GetHashCode();
+                }
 
-            call.SendInfoMessage(infoMessage);
-          
+                public override bool Equals(object obj)
+                {
+                    StateTransition other = obj as StateTransition;
+                    return other != null && this.CurrentState == other.CurrentState && this.Command == other.Command;
+                }
+            }
+
+            Dictionary<StateTransition, MyInfoProcessState> transitions;
+            public MyRegistrationListener MyRegistrationListener { get; set; }
+            public MyInfoProcessState CurrentState { get; private set; }
+            public InfoProcess()
+            {
+                CurrentState = MyInfoProcessState.Before;
+                transitions = new Dictionary<StateTransition, MyInfoProcessState>
+            {
+                { new StateTransition(MyInfoProcessState.Before, MyInfoProcessCommands.StartAll), MyInfoProcessState.GetCallLog},
+               
+            };
+            }
+
+            public MyInfoProcessState GetNext(MyInfoProcessCommands command)
+            {
+                StateTransition transition = new StateTransition(CurrentState, command);
+                MyInfoProcessState nextState;
+                if (!transitions.TryGetValue(transition, out nextState))
+                    throw new Exception("Invalid transition: " + CurrentState + " -> " + command);
+                return nextState;
+            }
+
+            public void MoveNext(MyInfoProcessCommands command)
+            {
+                MyInfoProcessState previewState = CurrentState;
+                CurrentState = GetNext(command);
+                if (this.MyRegistrationListener != null && previewState != CurrentState)
+                {
+                   // MyRegistrationListener.onMyRegistrationStateChanged(CurrentState);
+                }
+            }
         }
-
 
     }
 }

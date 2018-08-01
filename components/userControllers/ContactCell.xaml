@@ -14,7 +14,7 @@
             </StackLayout>
 
 
-            <Grid  x:Name="actionBar" IsVisible="False" RowSpacing="1" ColumnSpacing="5">
+            <Grid  x:Name="actionBar" IsVisible="False"  ColumnSpacing="5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                        </Grid.RowDefinitions>

@@ -62,7 +62,7 @@ namespace LinphoneXamarin.components
 
             }
             if (callService.isPaused)
-                hold.TextColor = Color.AliceBlue;
+                hold.TextColor = Color.DeepSkyBlue;
             else
                 hold.TextColor = Color.DimGray;
 
@@ -120,14 +120,14 @@ namespace LinphoneXamarin.components
             controlGrid.Children.Add(speaker, 2, 0);
             controlGrid.Children.Add(settings, 3, 0);
             controlGrid.Children.Add(Terminate, 1, 3, 1, 2);
-            controlGrid.RowSpacing = 20;
+            controlGrid.RowSpacing = 30;
         }
 
         private void setOutgoingMode()
         {
             controlGrid.Children.Clear();
             controlGrid.Children.Add(Terminate, 1, 3, 1, 2);
-            controlGrid.RowSpacing = 20;
+            controlGrid.RowSpacing = 30;
         }
     }
 }

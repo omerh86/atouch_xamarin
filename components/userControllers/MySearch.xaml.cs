@@ -42,30 +42,40 @@ namespace LinphoneXamarin.components.userControllers
             contactService = ContactService.Instance;
             this.BindingContext = contactList;
             searchList.IsVisible = false;
+
+            searchInput.BindingContext = alias;
+            inputComponent.IsVisible = isSearchInput;
         }
 
-     
+        public static readonly BindableProperty aliasProperty =
+         BindableProperty.Create("alias", typeof(string), typeof(ContactCell), "");
+
+        public string alias
+        {
+            get { return (string)GetValue(aliasProperty); }
+            set
+            {
+                SetValue(aliasProperty, value);
+                doSearch(value);
+            }
+        }
+
+        public static readonly BindableProperty isSearchInputProperty =
+        BindableProperty.Create("isSearchInput", typeof(bool), typeof(ContactCell), true);
+
+        public bool isSearchInput
+        {
+            get { return (bool)GetValue(isSearchInputProperty); }
+            set
+            {
+                SetValue(isSearchInputProperty, value);
+                inputComponent.IsVisible = value;
+            }
+        }
 
         private void onSearchedClicked(object sender, TextChangedEventArgs e)
         {
-            string filter = searchInput.Text;
-            if (filter != e.OldTextValue)
-            {
-                if (filter.Length < 2)
-                {
-                    contactList = new List<Contact>();
-                    this.BindingContext = contactList;
-                    searchList.IsVisible = false;
-                    Execute(Command, true);
-                }
-                else
-                {
-                    searchList.IsVisible = true;
-                    contactList = contactService.getContactByPartialName(filter);
-                    this.BindingContext = contactList;
-                    Execute(Command, false);
-                }
-            }
+            doSearch(searchInput.Text);
         }
 
         private void onClearSearch(object sender, EventArgs e)
@@ -73,6 +83,35 @@ namespace LinphoneXamarin.components.userControllers
             searchInput.Text = "";
         }
 
+        private void doSearch(string filter)
+        {
+
+
+            if (filter.Length < 4)
+            {
+                contactList = new List<Contact>();
+                this.BindingContext = contactList;
+                searchList.IsVisible = false;
+
+                Execute(Command, true);
+            }
+            else
+            {
+                searchList.IsVisible = true;
+
+                contactList = contactService.getContactByPartialName(filter);
+                this.BindingContext = contactList;
+                Execute(Command, false);
+            }
+
+        }
+
+
+        void OnItemAppearing(object sender, ItemVisibilityEventArgs e)
+        {
+            Console.WriteLine("omer40" + e);
+
+        }
 
     }
 }

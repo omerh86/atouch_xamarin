@@ -13,6 +13,7 @@ namespace LinphoneXamarin.components
         {
             InitializeComponent();
             this.BindingContext = phoneNumber;
+            search.isSearchInput = false;
         }
 
         private void onDialPadClicked(object sender, EventArgs e)
@@ -25,6 +26,7 @@ namespace LinphoneXamarin.components
                 phoneNumber=phoneNumber.Insert(phoneNumber.Length, btn.Text);
             }
             this.BindingContext = phoneNumber;
+            search.alias = phoneNumber;
         }
 
         private void OnCallClicked(object sender, EventArgs e)
@@ -39,6 +41,7 @@ namespace LinphoneXamarin.components
             {
                 phoneNumber = phoneNumber.Substring(0, phoneNumber.Length - 1);
                 this.BindingContext = phoneNumber;
+                search.alias = phoneNumber;
             }
 
         }

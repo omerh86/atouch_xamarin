@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              Title="" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             x:Class="LinphoneXamarin.components.DialPad">
+             x:Class="LinphoneXamarin.components.DialPad"
+               xmlns:control="clr-namespace:LinphoneXamarin.components.userControllers">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -28,48 +29,53 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical" VerticalOptions="End" HorizontalOptions="FillAndExpand">
-            <StackLayout Padding="10 " BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <Label x:Name="number" YAlign="Center" HorizontalOptions="StartAndExpand" FontSize="Large" TextColor="Black" Text="{Binding}"/>
-                <Button Clicked="clear" Text="&#xf55a;" BorderColor="Transparent" BackgroundColor="Transparent" TextColor="DimGray" FontSize="Medium">
-                    <Button.FontFamily>
-                        <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" iOS="FontAwesome5FreeSolid" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
-                    </Button.FontFamily>
-                </Button>
-                <!--<Button  Text="Clear" HorizontalOptions="End" Clicked="clear" />-->
-            </StackLayout>
-            <Grid Margin="5"  x:Name="controlGrid" RowSpacing="1" ColumnSpacing="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="60" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+        <StackLayout Orientation="Vertical" VerticalOptions="End">
+            <ScrollView>
+                <control:MySearch x:Name="search" alias="{Binding}" />
+            </ScrollView>
+            <StackLayout Orientation="Vertical" VerticalOptions="End" HorizontalOptions="Fill">
+                <StackLayout Padding="10 " BackgroundColor="White" Orientation="Horizontal" HorizontalOptions="Fill">
+                    <Label x:Name="number" YAlign="Center" HorizontalOptions="StartAndExpand" FontSize="Large" TextColor="Black" Text="{Binding}"/>
+                    <Button Clicked="clear" Text="&#xf55a;" BorderColor="Transparent" BackgroundColor="Transparent" TextColor="DimGray" FontSize="Medium">
+                        <Button.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" iOS="FontAwesome5FreeSolid" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
+                        </Button.FontFamily>
+                    </Button>
+                    <!--<Button  Text="Clear" HorizontalOptions="End" Clicked="clear" />-->
+                </StackLayout>
+                <Grid Margin="5"  x:Name="controlGrid" RowSpacing="1" ColumnSpacing="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="60" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                <Button Clicked="onDialPadClicked" Text="1" Grid.Row="0" Grid.Column="0" Style="{StaticResource plainButton}" />
-                <Button Clicked="onDialPadClicked" Text="2" Grid.Row="0" Grid.Column="1" Style="{StaticResource blueButton}" />
-                <Button Clicked="onDialPadClicked" Text="3" Grid.Row="0" Grid.Column="2" Style="{StaticResource plainButton}" />
-                <Button Clicked="onDialPadClicked" Text="4" Grid.Row="1" Grid.Column="0" Style="{StaticResource plainButton}" />
-                <Button Clicked="onDialPadClicked" Text="5" Grid.Row="1" Grid.Column="1" Style="{StaticResource blueButton}" />
-                <Button Clicked="onDialPadClicked" Text="6" Grid.Row="1" Grid.Column="2" Style="{StaticResource plainButton}" />
-                <Button Clicked="onDialPadClicked" Text="7" Grid.Row="2" Grid.Column="0" Style="{StaticResource plainButton}" />
-                <Button Clicked="onDialPadClicked" Text="8" Grid.Row="2" Grid.Column="1" Style="{StaticResource blueButton}" />
-                <Button Clicked="onDialPadClicked" Text="9" Grid.Row="2" Grid.Column="2" Style="{StaticResource plainButton}" />
-                <Button Clicked="onDialPadClicked" Text="*" Grid.Row="3" Grid.Column="0" Style="{StaticResource plainButton}" />
-                <Button Clicked="onDialPadClicked" Text="0" Grid.Row="3" Grid.Column="1" Style="{StaticResource blueButton}" />
-                <Button Clicked="onDialPadClicked" Text="#" Grid.Row="3" Grid.Column="2" Style="{StaticResource plainButton}" />
-                <Button Clicked="OnCallClicked" Text="&#xf095;" Grid.ColumnSpan="3" Grid.Row="4" Grid.Column="0" Style="{StaticResource greenButton}" >
-                    <Button.FontFamily>
-                        <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" iOS="FontAwesome5FreeSolid" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
-                    </Button.FontFamily>
-                </Button>
-            </Grid>
+                    <Button Clicked="onDialPadClicked" Text="1" Grid.Row="0" Grid.Column="0" Style="{StaticResource plainButton}" />
+                    <Button Clicked="onDialPadClicked" Text="2" Grid.Row="0" Grid.Column="1" Style="{StaticResource blueButton}" />
+                    <Button Clicked="onDialPadClicked" Text="3" Grid.Row="0" Grid.Column="2" Style="{StaticResource plainButton}" />
+                    <Button Clicked="onDialPadClicked" Text="4" Grid.Row="1" Grid.Column="0" Style="{StaticResource plainButton}" />
+                    <Button Clicked="onDialPadClicked" Text="5" Grid.Row="1" Grid.Column="1" Style="{StaticResource blueButton}" />
+                    <Button Clicked="onDialPadClicked" Text="6" Grid.Row="1" Grid.Column="2" Style="{StaticResource plainButton}" />
+                    <Button Clicked="onDialPadClicked" Text="7" Grid.Row="2" Grid.Column="0" Style="{StaticResource plainButton}" />
+                    <Button Clicked="onDialPadClicked" Text="8" Grid.Row="2" Grid.Column="1" Style="{StaticResource blueButton}" />
+                    <Button Clicked="onDialPadClicked" Text="9" Grid.Row="2" Grid.Column="2" Style="{StaticResource plainButton}" />
+                    <Button Clicked="onDialPadClicked" Text="*" Grid.Row="3" Grid.Column="0" Style="{StaticResource plainButton}" />
+                    <Button Clicked="onDialPadClicked" Text="0" Grid.Row="3" Grid.Column="1" Style="{StaticResource blueButton}" />
+                    <Button Clicked="onDialPadClicked" Text="#" Grid.Row="3" Grid.Column="2" Style="{StaticResource plainButton}" />
+                    <Button Clicked="OnCallClicked" Text="&#xf095;" Grid.ColumnSpan="3" Grid.Row="4" Grid.Column="0" Style="{StaticResource greenButton}" >
+                        <Button.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" iOS="FontAwesome5FreeSolid" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
+                        </Button.FontFamily>
+                    </Button>
+                </Grid>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

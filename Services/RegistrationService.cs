@@ -13,27 +13,23 @@ namespace LinphoneXamarin.Services
 
         public RegistrationState registrationState = RegistrationState.None;
         private LinphoneRegistrationListener registrationListener;
-        private Core LinphoneCore
-        {
-            get
-            {
-                return ((App)App.Current).LinphoneCore;
-            }
-        }
+        private Core LinphoneCore;
         private CoreListener Listener;
+
         private void OnRegistration(Core lc, ProxyConfig config, RegistrationState state, string message)
         {
             if (this.registrationListener != null && this.registrationState != state)
             {
                 registrationListener.onLinphoneStatusChanged(state, message);
             }
-           
+
             this.registrationState = state;
         }
 
         RegistrationService()
         {
-            Listener = ((App)App.Current).coreListener;
+            LinphoneCore = LinphoneBase.Instance.linphoneCore;
+            Listener = LinphoneBase.Instance.coreListener;
             Listener.OnRegistrationStateChanged = OnRegistration;
             LinphoneCore.AddListener(Listener);
             logger();
@@ -84,8 +80,8 @@ namespace LinphoneXamarin.Services
             identity.Port = 5060;
             proxyConfig.Edit();
 
-            //  proxyConfig.SetCustomHeader("User-Agent", "Tadiran ATouch PC/1.0.201 (belle-sip/1.6.3)");
-            proxyConfig.SetCustomHeader("User-Agent", "Tadiran ATouch Android/1.0.201 (belle-sip/1.6.3)");
+            //proxyConfig.SetCustomHeader("User-Agent", "Tadiran ATouch PC/1.0.201 (belle-sip/1.6.3)");
+             proxyConfig.SetCustomHeader("User-Agent", "Tadiran ATouch Android/1.0.201 (belle-sip/1.6.3)");
             proxyConfig.IdentityAddress = identity;
             proxyConfig.ServerAddr = identity.AsString();
             proxyConfig.Route = identity.AsString();

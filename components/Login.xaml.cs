@@ -11,7 +11,7 @@ namespace LinphoneXamarin.components
 {
     public partial class Login : ContentPage, LoginRegistrationListener
     {
-        // RegistrationService registrationService;
+
         LoginService loginService;
 
         public Login()
@@ -24,19 +24,19 @@ namespace LinphoneXamarin.components
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            loginService.setLoginRegistrationListener(this);
 
             LoginInfo aeonixLoginInfo = MyFileSystem.Instance.loadLoginCardential(CardentialState.Aeonix);
             if (aeonixLoginInfo != null)
-            {
-                doLogin(false);
-                stack_registrar.IsVisible = false;
-            }
+                doLogin(RegisterCommands.StartAeonix);
             else
-            {
                 this.populateLoginFields();
-            }
 
-            loginService.setLoginRegistrationListener(this);
+        }
+
+        protected override void OnDisappearing()
+        {
+            Console.WriteLine("omer40: " + "on logind Disappearing");
         }
 
 
@@ -55,10 +55,11 @@ namespace LinphoneXamarin.components
 
         private void onAutoLogin(object sender, EventArgs e)
         {
-
-              MyFileSystem.Instance.saveLoginCardential(new LoginInfo("U4002ecc359351475676a", "Po-570w", "172.28.10.127"), CardentialState.Aeonix);
+            //Amir
+            MyFileSystem.Instance.saveLoginCardential(new LoginInfo("U4002ecc359351475676a", "Po-570w", "172.28.10.127"), CardentialState.Aeonix);
+            //Avi
             //MyFileSystem.Instance.saveLoginCardential(new LoginInfo("2006A0D3C10DE55B", "A7nhe~6", "172.28.11.141"), CardentialState.Aeonix);
-            doLogin(false);
+            doLogin(RegisterCommands.StartAeonix);
         }
 
         private void OnRegisterClicked(object sender, EventArgs e)
@@ -67,21 +68,14 @@ namespace LinphoneXamarin.components
             LoginInfo loginInfo = new LoginInfo(username.Text, password.Text, domain.Text);
             loginService.saveTr87Cardential(loginInfo);
             registration_status.Text = "Progress";
-            doLogin(false);
+            doLogin(RegisterCommands.StartAll);
         }
 
-        private void doLogin(bool isIncludeTr87)
+        private void doLogin(RegisterCommands command)
         {
-            loginService.login(isIncludeTr87);
-        }
-
-
-        private void OnSendToken(object sender, EventArgs e)
-        {
-            string token = "fqyJf8zKpNo:APA91bFklY9PmYzmX1_rwT5Cg-6tpztSI4vRhWcZnIpB4n-npTLRN43PsE-q6b2IBqGuaD8Qixc7KhX6CiVwuaC4z2m8iqFcL_YfWFtz4F5KlfwMaR3ZzU2mH2eqWlYBbhZYI4sMzHCSqW8Ng1lbAJ-Zo_6CiMFOKA";
-            string strToSend = MySendRequestHelper.Instance.getConnectionRequest(new MySendRequestHelper.ConnectionProp(token));
-            AeonixInfoService.Instance.sendToInfoAeonix(strToSend);
-
+            stack_registrar.IsVisible = false;
+            load.IsVisible = true;
+            loginService.register(command);
         }
 
 
@@ -89,10 +83,11 @@ namespace LinphoneXamarin.components
         {
             Device.BeginInvokeOnMainThread(() =>
             {
+                load.IsVisible = false;
                 stack_registrar.IsVisible = true;
                 registration_status.Text = "Failed";
                 this.populateLoginFields();
-               
+
             });
 
         }
@@ -101,9 +96,10 @@ namespace LinphoneXamarin.components
         {
             Device.BeginInvokeOnMainThread(() =>
             {
+                load.IsVisible = false;
                 registration_status.Text = "Succsses";
                 stack_registrar.IsVisible = true;
-                //((App)App.Current).MainPage = new components.navBar();
+                ((App)App.Current).MainPage = new components.navBar();
             });
         }
     }

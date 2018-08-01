@@ -5,8 +5,8 @@
         xmlns:control="clr-namespace:LinphoneXamarin.components.userControllers">
 
     <StackLayout x:Name="stack_layout" VerticalOptions="Fill" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="15">
-        <StackLayout Margin="5" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-            <Entry HorizontalOptions="FillAndExpand"  TextChanged="onSearchedClicked" x:Name="searchInput" Placeholder="search" />
+        <StackLayout  x:Name="inputComponent" Margin="5" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+            <Entry HorizontalOptions="FillAndExpand"  TextChanged="onSearchedClicked" Text="{Binding}" x:Name="searchInput" Placeholder="search" />
             <Button Clicked="onClearSearch" Text="&#xf55a;" BorderColor="Transparent" BackgroundColor="Transparent" TextColor="DimGray" FontSize="Medium">
                 <Button.FontFamily>
                     <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" iOS="FontAwesome5FreeSolid" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
@@ -15,8 +15,8 @@
             <!--<Button HorizontalOptions="End" Text="Clear" Clicked="onClearSearch" />-->
             
          </StackLayout>
-
-        <ListView SeparatorVisibility="None"  RowHeight="150"  VerticalOptions="Fill" x:Name="searchList" ItemsSource="{Binding}">
+        <Label x:Name="noItemslabel" FontSize="Small" VerticalTextAlignment="Center" TextColor="DimGray" Text="No items to show"></Label>
+        <ListView ItemAppearing="OnItemAppearing"  HasUnevenRows="True" SeparatorVisibility="None" BackgroundColor="White"  x:Name="searchList" ItemsSource="{Binding}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <control:ContactCell isFav="{Binding isFav}" userName="{Binding userName}" displayName="{Binding displayName}" alias="{Binding alias}" />

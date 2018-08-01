@@ -25,18 +25,14 @@ namespace LinphoneXamarin.Services
         private Tr87stateListener tr87StateListener;
         private CallViewInitiater callViewInitiater;
 
-        //
+       
         private bool isCallStateReallyChanged = false;
 
-        //
-        private Core LinphoneCore
-        {
-            get
-            {
-                return ((App)App.Current).LinphoneCore;
-            }
-        }
+        
+        private Core LinphoneCore;
         private CoreListener Listener;
+
+      
 
         private void OnCall(Core lc, Call lcall, CallState state, string message)
         {
@@ -193,7 +189,8 @@ namespace LinphoneXamarin.Services
 
         CallService()
         {
-            Listener = ((App)App.Current).coreListener;
+            LinphoneCore = LinphoneBase.Instance.linphoneCore;
+            Listener = LinphoneBase.Instance.coreListener;
             Listener.OnCallStateChanged = OnCall;
             LinphoneCore.AddListener(Listener);
         }
@@ -220,7 +217,9 @@ namespace LinphoneXamarin.Services
             CallParams cp = LinphoneCore.CreateCallParams(null);
             cp.AddCustomHeader("Content-Disposition", "signal;handling=required");
             cp.AddCustomHeader("TR87-Mode", "true");
-            cp.AddCustomHeader("User-Agent", "Tadiran ATouch PC/1.0.201 (belle-sip/1.6.3)");
+          //  cp.AddCustomHeader("User-Agent", "Tadiran ATouch PC/1.0.201 (belle-sip/1.6.3)");
+            cp.AddCustomHeader("User-Agent", "Tadiran ATouch Android/1.0.201 (belle-sip/1.6.3)");
+            //proxyConfig.SetCustomHeader("User-Agent", "Tadiran ATouch Android/1.0.201 (belle-sip/1.6.3)");
             LinphoneCore.InviteAddressWithParams(addr, cp);
         }
 

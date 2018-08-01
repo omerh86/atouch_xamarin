@@ -11,7 +11,7 @@ namespace LinphoneXamarin.Entities
         Aeonix
     }
 
-   public enum LoginError
+    public enum LoginError
     {
         TimeOut,
         RestartLogin,
@@ -19,6 +19,7 @@ namespace LinphoneXamarin.Entities
         RequestTerminated,
         InfoFailed,
         None
+
     }
     public enum MyRegistrationState
     {
@@ -27,11 +28,48 @@ namespace LinphoneXamarin.Entities
         GetingInfo,
         DisconnectingTR87,
         ConnectingAeonix,
+        ReConnectingAeonix,
         InviteAeonix,
         AfterAeonix
 
     }
 
+    public enum RegisterCommands
+    {
+        StartAll,
+        StartAeonix,
+        ReRegister,
+        Continue,
+        Clear,
+        End
+    }
 
+    public enum MyInfoProcessState
+    {
+        Before,
+        GetRsUser,
+        GetPicture,
+        GetConnection,
+        GetCallTargetDevices,
+        GetAITSettings,
+        GetExplicitPresenceInfo,
+        StartMonitorUser,
+        GetFavorites,
+        GetGroups,
+        GetCallLogCountersRequest,
+        GetDialPlanFeatures,
+        StartMonitorInstantMessages,
+        GetCallLog,
+        After
+    }
+
+    public enum MyInfoProcessCommands
+    {
+        StartAll,
+        Continue,
+        Repeat,
+        Clear
+
+    }
 
 }
