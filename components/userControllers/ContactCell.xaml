@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ViewCell Tapped="onToggleActions" xmlns="http://xamarin.com/schemas/2014/forms" 
+<ViewCell  Tapped="onToggleActions" xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LinphoneXamarin.components.userControllers.ContactCell">
     <ViewCell.View>
@@ -14,7 +14,7 @@
             </StackLayout>
 
 
-            <Grid  x:Name="actionBar" IsVisible="False"  ColumnSpacing="5">
+            <Grid  x:Name="actionBar"  ColumnSpacing="5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                        </Grid.RowDefinitions>

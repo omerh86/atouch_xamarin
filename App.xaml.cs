@@ -34,9 +34,11 @@ namespace LinphoneXamarin
             LinphoneWrapper.setNativeLogHandler();
             LinphoneCore = LinphoneBase.Instance.linphoneCore;
             coreListener = LinphoneBase.Instance.coreListener;
-            MainPage = new NavigationPage(new components.Login());
-
-
+            var page =new NavigationPage(new components.Login());
+            page.BarBackgroundColor = Color.Brown;
+            page.BarTextColor = Color.White;
+            MainPage = page;
+            //MainPage = new components.navBar();
         }
 
 

@@ -13,6 +13,7 @@ namespace LinphoneXamarin.components.userControllers
 
     public partial class ContactCell : ViewCell
     {
+
         ContactService contactService;
         CallService callService;
         bool isActionsBar = false;
@@ -38,12 +39,18 @@ namespace LinphoneXamarin.components.userControllers
                 Command = new Command(() => onInfoClicked()),
             });
 
-            //item.GestureRecognizers.Add(new TapGestureRecognizer
-            //{
-            //    Command = new Command(() => onToggleActions()),
-            //});
+           
 
         }
+
+
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+           actionBar.IsVisible = isActionsBar;
+        }
+
 
         public static readonly BindableProperty isFavProperty =
 BindableProperty.Create("isFav", typeof(bool), typeof(ContactCell), false);

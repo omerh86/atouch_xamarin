@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Linphone;
 using System.Threading.Tasks;
+using System.Diagnostics.Contracts;
 
 namespace LinphoneXamarin.Services
 {
@@ -89,6 +90,7 @@ namespace LinphoneXamarin.Services
         }
 
 
+
         private async Task phoneContactsAsync()
         {
             try
@@ -105,6 +107,9 @@ namespace LinphoneXamarin.Services
                 Console.WriteLine("omer40: " + e);
             }
         }
+
+      
+
 
 
     }
