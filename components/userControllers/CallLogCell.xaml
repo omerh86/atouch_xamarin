@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell Tapped="onToggleActions" xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LinphoneXamarin.components.userControllers.CallLogCell">
+  <ViewCell.View>
+        <StackLayout   Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="FillAndExpand" >
+            <StackLayout x:Name="item" VerticalOptions="Center" Margin="15" HorizontalOptions="FillAndExpand" Orientation="Horizontal" >
+                <Image HeightRequest="50" WidthRequest="50" Source="user.png" />
+                <StackLayout Margin="5"  Orientation="Vertical" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                    <Label FontSize="Large" TextColor="Black" Text="{Binding displayName}"/>
+                    <StackLayout  Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center" >
+                        <Label FontSize="Small" TextColor="DimGray" HorizontalOptions="StartAndExpand"  Text="{Binding alias}"/>
+                        <Label FontSize="Small"  HorizontalOptions="End" FontAttributes="Bold" TextColor="Blue" Text="{Binding callsInfo.Count}"/>
+                    </StackLayout>
+                </StackLayout>
+
+            </StackLayout>
+
+
+            <Grid  x:Name="actionBar" RowSpacing="5"  ColumnSpacing="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0"  x:Name="favBtn"  Text="&#xf005;" HorizontalOptions="Center"  BackgroundColor="Transparent" TextColor="DimGray" FontSize="Small">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String" Android="fa-regular-400.ttf#Font Awesome 5 Free Regular" iOS="Font Awesome 5 Free" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
+                    </Label.FontFamily>
+                </Label>
+                <Label Grid.Row="0" Grid.Column="1" x:Name="callBtn" Text="&#xf095;" HorizontalOptions="Center"  BackgroundColor="Transparent" TextColor="DimGray" FontSize="Small">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" iOS="FontAwesome5FreeSolid" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
+                    </Label.FontFamily>
+                </Label>
+                <Label Grid.Row="0" Grid.Column="2" x:Name="infoBtn"  Text="&#xf129;" HorizontalOptions="Center" BackgroundColor="Transparent" TextColor="DimGray" FontSize="Small">
+                    <Label.FontFamily>
+                        <OnPlatform x:TypeArguments="x:String" Android="fa-solid-900.ttf#Font Awesome 5 Free Regular" iOS="FontAwesome5FreeSolid" WinPhone="Assets/fa-regular-400.ttf#Font Awesome 5 Free" />
+                    </Label.FontFamily>
+                </Label>
+              
+            </Grid>
+           
+
+        </StackLayout>
+    </ViewCell.View>
+</ViewCell>
