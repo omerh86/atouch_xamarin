@@ -56,9 +56,9 @@ namespace LinphoneXamarin.components
         private void onAutoLogin(object sender, EventArgs e)
         {
             //Amir
-            MyFileSystem.Instance.saveLoginCardential(new LoginInfo("U4002ecc359351475676a", "Po-570w", "172.28.10.127"), CardentialState.Aeonix);
+            //MyFileSystem.Instance.saveLoginCardential(new LoginInfo("U4002ecc359351475676a", "Po-570w", "172.28.10.127"), CardentialState.Aeonix);
             //Avi
-            //MyFileSystem.Instance.saveLoginCardential(new LoginInfo("2006A0D3C10DE55B", "A7nhe~6", "172.28.11.141"), CardentialState.Aeonix);
+            MyFileSystem.Instance.saveLoginCardential(new LoginInfo("2006A0D3C10DE55B", "A7nhe~6", "172.28.11.141"), CardentialState.Aeonix);
             doLogin(RegisterCommands.StartAeonix);
         }
 

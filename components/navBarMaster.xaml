@@ -1,13 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LinphoneXamarin.components.navBarMaster"
-             Title="Master">
+             Title="Menu">
     <StackLayout>
         <ListView x:Name="MenuItemsListView"
               SeparatorVisibility="None"
               HasUnevenRows="true"
-              ItemsSource="{Binding MenuItems}">
+              ItemsSource="{Binding MenuItems}"
+                  BackgroundColor="#00688f">
             <ListView.Header>
                 <Grid BackgroundColor="#00688f">
                     <Grid.ColumnDefinitions>

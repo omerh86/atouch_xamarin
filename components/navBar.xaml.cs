@@ -10,6 +10,7 @@ using LinphoneXamarin.Util;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+
 namespace LinphoneXamarin.components
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -37,9 +38,11 @@ namespace LinphoneXamarin.components
             registrationService.setRegistrationListener(this);
             returnToCallBtn = new ToolbarItem
             {
-                Icon = "call.png",
+                Text = "call",
                 Command = new Command(this.returnToCallAction),
             };
+
+
         }
 
         private void goToCallView()

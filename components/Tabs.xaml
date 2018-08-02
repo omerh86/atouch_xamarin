@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TabbedPage 
             Title="Aeonix"
-    xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             x:Class="LinphoneXamarin.components.Tabs"
             xmlns:pages="clr-namespace:LinphoneXamarin.components">
-    <pages:ContactTabbedPage Icon="contact.png" />
-    <pages:DialPad Icon="dialpad.png" />
-    <pages:Messages Icon="chat.png" />
+    <pages:ContactTabbedPage Title="Contacts"  Icon="contact.png" />
+    <pages:DialPad  Title="Dial pad"  Icon="dialpad.png" />
+    <pages:Messages  Title="Messages" Icon="chat.png" />
     <!--<pages:MainPage Icon="voicemail.png" />-->
     
     
