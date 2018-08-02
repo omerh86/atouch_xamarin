@@ -39,8 +39,6 @@ namespace LinphoneXamarin.components.userControllers
                 Command = new Command(() => onInfoClicked()),
             });
 
-           
-
         }
 
 

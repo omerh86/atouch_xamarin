@@ -18,8 +18,9 @@ namespace LinphoneXamarin.Services
 
         ContactService()
         {
-            allContacts.Add(new Contact("1", "Roi", "2007", true));
-            allContacts.Add(new Contact("2", "Yuval", "2008", true));
+            allContacts.Add(new Contact("1", "Roi", "2007", ContactType.Aeonix));
+            allContacts.Add(new Contact("2", "Yuval", "2008", ContactType.Aeonix));
+
             phoneContactsAsync();
         }
 
@@ -68,7 +69,7 @@ namespace LinphoneXamarin.Services
         {
             List<Contact> result = allContacts.FindAll(delegate (Contact c)
               {
-                  string s = c.alias.ToString() + c.displayName + c.userName;
+                  string s = c.primaryAlias.ToString() + c.displayName + c.userName;
                   return s.ToLower().IndexOf(name.ToLower()) > -1;
               });
             if (result == null)
@@ -90,7 +91,6 @@ namespace LinphoneXamarin.Services
         }
 
 
-
         private async Task phoneContactsAsync()
         {
             try
@@ -99,7 +99,7 @@ namespace LinphoneXamarin.Services
                 Console.WriteLine("omer40: " + contacts);
                 foreach (var contact in contacts)
                 {
-                    this.allContacts.Add(new Contact(contact.Name, contact.Name, contact.Number, false));
+                    this.allContacts.Add(new Contact(contact.Name, contact.Name, contact.Number, ContactType.PhoneBook));
                 }
             }
             catch (Exception e)
@@ -108,7 +108,7 @@ namespace LinphoneXamarin.Services
             }
         }
 
-      
+
 
 
 

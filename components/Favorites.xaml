@@ -5,12 +5,12 @@
              x:Class="LinphoneXamarin.components.Favorites"
             xmlns:control="clr-namespace:LinphoneXamarin.components.userControllers">
 
-    <StackLayout  x:Name="stack_layout" VerticalOptions="Fill" HorizontalOptions="FillAndExpand" Orientation="Vertical" Spacing="15">
+    <StackLayout  x:Name="stack_layout" VerticalOptions="Fill" HorizontalOptions="Fill" Orientation="Vertical" Spacing="15">
 
         <control:MySearch x:Name="search" Command="{Binding} " />
 
-        <StackLayout VerticalOptions="FillAndExpand" >
-            <ListView RowHeight="150" x:Name="favorites" ItemsSource="{Binding}">
+        <StackLayout VerticalOptions="Fill" >
+            <ListView HasUnevenRows="True" SeparatorVisibility="None" x:Name="favorites" ItemsSource="{Binding}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <control:ContactCell isFav="{Binding isFav}" userName="{Binding userName}" displayName="{Binding displayName}" alias="{Binding alias}" />

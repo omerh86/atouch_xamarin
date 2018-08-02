@@ -15,7 +15,6 @@
             <!--<Button HorizontalOptions="End" Text="Clear" Clicked="onClearSearch" />-->
             
          </StackLayout>
-        <Label x:Name="noItemslabel" FontSize="Small" VerticalTextAlignment="Center" TextColor="DimGray" Text="No items to show"></Label>
         <ListView ItemAppearing="OnItemAppearing"  HasUnevenRows="True" SeparatorVisibility="None" BackgroundColor="White"  x:Name="searchList" ItemsSource="{Binding}">
             <ListView.ItemTemplate>
                 <DataTemplate>

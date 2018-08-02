@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LinphoneXamarin.Entities;
+using LinphoneXamarin.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,12 +11,20 @@ using Xamarin.Forms.Xaml;
 
 namespace LinphoneXamarin.components
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class Recent : ContentPage
-	{
-		public Recent ()
-		{
-			InitializeComponent ();
-		}
-	}
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class Recent : ContentPage
+    {
+        CallLogService callLogService;
+        private List<MyCallLog> allCallsLog;
+
+        public Recent()
+        {
+            InitializeComponent();
+            callLogService = CallLogService.Instance;
+            allCallsLog = callLogService.getCallsLog();
+            this.BindingContext = allCallsLog;
+        }
+
+
+    }
 }

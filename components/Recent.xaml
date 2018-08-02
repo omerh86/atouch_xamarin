@@ -4,8 +4,20 @@
              x:Class="LinphoneXamarin.components.Recent"
              xmlns:control="clr-namespace:LinphoneXamarin.components.userControllers">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout  x:Name="stack_layout" VerticalOptions="Fill" HorizontalOptions="Fill" Orientation="Vertical" Spacing="15">
+
             <control:MySearch x:Name="search" Command="{Binding} " />
+
+            <StackLayout VerticalOptions="Fill" >
+                <ListView HasUnevenRows="True" SeparatorVisibility="None" x:Name="favorites" ItemsSource="{Binding}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <control:CallLogCell isFav="{Binding isFav}" userName="{Binding userName}" displayName="{Binding alias}" alias="{Binding alias}" callsInfo="{Binding callsInfo}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
         </StackLayout>
+
     </ContentPage.Content>
 </ContentPage>

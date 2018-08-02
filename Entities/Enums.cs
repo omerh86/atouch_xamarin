@@ -72,4 +72,19 @@ namespace LinphoneXamarin.Entities
 
     }
 
+    public enum ContactType
+    {
+        Aeonix,
+        PhoneBook,
+        Group,
+        Unknown
+    }
+
+    public enum CallDirection
+    {
+        Missed,
+        Recieved,
+        OutGoingMissed,
+        OutGoing
+    }
 }
