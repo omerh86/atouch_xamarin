@@ -11,15 +11,14 @@ namespace LinphoneXamarin.Services
     {
 
         public List<Contact> allContacts = new List<Contact>();
-      private FavListener favListener;
+        private FavListener favListener;
         private static ContactService instance = null;
         private static readonly object padlock = new object();
 
         ContactService()
         {
-
-            allContacts.Add(new Contact("1", "Roi", "2007",true));
-            allContacts.Add(new Contact("2", "Yuval", "2008",true));
+            allContacts.Add(new Contact("1", "Roi", "2007", true));
+            allContacts.Add(new Contact("2", "Yuval", "2008", true));
             phoneContactsAsync();
         }
 
@@ -69,7 +68,7 @@ namespace LinphoneXamarin.Services
             List<Contact> result = allContacts.FindAll(delegate (Contact c)
               {
                   string s = c.alias.ToString() + c.displayName + c.userName;
-                  return s.ToLower().IndexOf(name.ToLower())>-1;
+                  return s.ToLower().IndexOf(name.ToLower()) > -1;
               });
             if (result == null)
                 result = new List<Contact>();
@@ -98,7 +97,7 @@ namespace LinphoneXamarin.Services
                 Console.WriteLine("omer40: " + contacts);
                 foreach (var contact in contacts)
                 {
-                    this.allContacts.Add(new Contact(contact.Name, contact.Name, contact.Number,false));
+                    this.allContacts.Add(new Contact(contact.Name, contact.Name, contact.Number, false));
                 }
             }
             catch (Exception e)

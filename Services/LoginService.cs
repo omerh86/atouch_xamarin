@@ -232,8 +232,8 @@ namespace LinphoneXamarin.Services
                     break;
                 case MyRegistrationState.InviteAeonix:
                     Console.WriteLine("omer40: " + "InviteAeonix");
-                    // CallService.Instance.makeTr87Call();
-                    onTr87Established();
+                     CallService.Instance.makeTr87Call();
+                   // onTr87Established();
                     break;
                 case MyRegistrationState.AfterAeonix:
                     Console.WriteLine("omer40: " + "AfterAeonix");
