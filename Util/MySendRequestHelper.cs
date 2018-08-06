@@ -42,6 +42,12 @@ namespace LinphoneXamarin.Util
             return objToJson<FcmRequest>(fcmRequest);
         }
 
+        public string getFavoritesRequest(UserNameProp userNameProp)
+        {
+            FavoritesRequest favoritesRequest = new FavoritesRequest(userNameProp);
+            return objToJson<FavoritesRequest>(favoritesRequest);
+        }
+
         public string getCreateAccountRequest(CreateAccountProp createAccountProp)
         {
             CreateAccountRequest createAccountRequest = new CreateAccountRequest(createAccountProp);
@@ -64,6 +70,12 @@ namespace LinphoneXamarin.Util
         {
             NextResponseRequest nextResponseRequest = new NextResponseRequest(new object());
             return objToJson<NextResponseRequest>(nextResponseRequest);
+        }
+
+        public string getContactListRequest(ContactListProp contactListProp)
+        {
+            ContactListRequest contactListRequest = new ContactListRequest(contactListProp);
+            return objToJson<ContactListRequest>(contactListRequest);
         }
 
 
@@ -115,6 +127,37 @@ namespace LinphoneXamarin.Util
             }
         }
 
+
+        public struct ContactListProp
+        {
+            public int startIndex;
+            public int endIndex;
+            public string sortingMethod;
+            public string sortingOrder;
+            public string filter;
+            public bool filterAliasOnly;
+
+            public ContactListProp(int startIndex, int endIndex, string filter)
+            {
+                this.startIndex = startIndex;
+                this.endIndex = endIndex;
+                this.sortingMethod = "LAST_NAME";
+                this.sortingOrder = "ASCENDING";
+                this.filter = filter;
+                this.filterAliasOnly = false;
+            }
+        }
+
+        private struct ContactListRequest
+        {
+            public ContactListProp GetContactList;
+
+            public ContactListRequest(ContactListProp p)
+            {
+                GetContactList = p;
+            }
+        }
+
         public struct CreateAccountProp
         {
             public string userLoginName;
@@ -163,6 +206,15 @@ namespace LinphoneXamarin.Util
             }
         }
 
+        private struct FavoritesRequest
+        {
+            public UserNameProp GetFavorites;
+
+            public FavoritesRequest(UserNameProp p)
+            {
+                GetFavorites = p;
+            }
+        }
 
         private struct PicturerRequest
         {
@@ -196,6 +248,99 @@ namespace LinphoneXamarin.Util
             string res = JsonConvert.SerializeObject(obj);
             return res;
         }
+
+        public FavRootobjectResponse getServerFavRootObject(string json)
+        {
+            return jsonToObj<FavRootobjectResponse>(json);
+        }
+
+        public ContactlistRootobjectResponse getServerContactListRootObject(string json)
+        {
+            return jsonToObj<ContactlistRootobjectResponse>(json);
+        }
+
+        public class FavRootobjectResponse
+        {
+            public Containerinfo containerInfo { get; set; }
+        }
+
+        public class Containerinfo
+        {
+            public string type { get; set; }
+            public int errCode { get; set; }
+            public string errDesc { get; set; }
+            public int totalNumber { get; set; }
+            public Favorit[] favorits { get; set; }
+        }
+
+        public class ContactlistRootobjectResponse
+        {
+            public Contactlistresponse ContactListResponse { get; set; }
+        }
+
+        public class Contactlistresponse
+        {
+            public int errCode { get; set; }
+            public string errDesc { get; set; }
+            public int totalNumber { get; set; }
+            public Contactspresence[] contactsPresence { get; set; }
+        }
+
+        public class Contactspresence
+        {
+            public Contact contact { get; set; }
+            public Presense presense { get; set; }
+        }
+
+        public class Contact
+        {
+            public Alias[] aliases { get; set; }
+            public string displayName { get; set; }
+            public string emailAddress { get; set; }
+            public object[] extAliases { get; set; }
+            public string firstName { get; set; }
+            public int imageSignature { get; set; }
+            public string lastName { get; set; }
+            public string serviceType { get; set; }
+            public string userName { get; set; }
+         
+        }
+
+        public class Alias
+        {
+            public string completeAliasName { get; set; }
+            public bool completeInterGroupAccess { get; set; }
+            public string configuration { get; set; }
+        }
+
+     
+
+        public class Presense
+        {
+            public Presence presence { get; set; }
+        }
+
+        public class Presence
+        {
+            public string explicitPresence { get; set; }
+            public string implicitPresence { get; set; }
+        }
+
+        public class Favorit
+        {
+            public Alias[] aliases { get; set; }
+            public string displayName { get; set; }
+            public string emailAddress { get; set; }
+            public string[] extAliases { get; set; }
+            public string firstName { get; set; }
+            public int imageSignature { get; set; }
+            public string lastName { get; set; }
+            public string serviceType { get; set; }
+            public string userName { get; set; }
+        }
+
+      
+
 
     }
 }

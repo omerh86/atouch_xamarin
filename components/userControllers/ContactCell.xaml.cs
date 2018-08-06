@@ -23,7 +23,7 @@ namespace LinphoneXamarin.components.userControllers
             contactService = ContactService.Instance;
             callService = CallService.Instance;
             InitializeComponent();
-          
+
             favBtn.GestureRecognizers.Add(new TapGestureRecognizer
             {
                 Command = new Command(() => onToggleContactFavStatus()),
@@ -46,7 +46,7 @@ namespace LinphoneXamarin.components.userControllers
         protected override void OnAppearing()
         {
             base.OnAppearing();
-           actionBar.IsVisible = isActionsBar;
+            actionBar.IsVisible = isActionsBar;
         }
 
 
@@ -113,11 +113,11 @@ BindableProperty.Create("userName", typeof(string), typeof(ContactCell), "");
 
 
         public static readonly BindableProperty aliasProperty =
-          BindableProperty.Create("alias", typeof(int), typeof(ContactCell), 0);
+          BindableProperty.Create("alias", typeof(string), typeof(ContactCell), "");
 
-        public int alias
+        public string alias
         {
-            get { return (int)GetValue(aliasProperty); }
+            get { return (string)GetValue(aliasProperty); }
             set { SetValue(aliasProperty, value); }
         }
 

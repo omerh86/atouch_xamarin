@@ -18,7 +18,7 @@
         <ListView ItemAppearing="OnItemAppearing"  HasUnevenRows="True" SeparatorVisibility="None" BackgroundColor="White"  x:Name="searchList" ItemsSource="{Binding}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <control:ContactCell isFav="{Binding isFav}" userName="{Binding userName}" displayName="{Binding displayName}" alias="{Binding alias}" />
+                    <control:ContactCell isFav="{Binding isFav}" userName="{Binding userName}" displayName="{Binding displayName}" alias="{Binding primaryAlias}" />
                    
                 </DataTemplate>
             </ListView.ItemTemplate>

@@ -41,7 +41,8 @@ namespace LinphoneXamarin.components
                 Text = "call",
                 Command = new Command(this.returnToCallAction),
             };
-
+            if (CallService.Instance.pendingcallView)
+                onInitiateCallView();
 
         }
 

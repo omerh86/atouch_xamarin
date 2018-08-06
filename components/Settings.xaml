@@ -13,6 +13,8 @@
             <Button  Text="NextResponseRequest"  Clicked="NextResponseRequest" HorizontalOptions="Center" />
             <Button  Text="CreateAccountRequest"  Clicked="CreateAccountRequest" HorizontalOptions="Center" />
             <Button  Text="GetRsUserRequest"  Clicked="GetRsUserRequest" HorizontalOptions="Center" />
+            <Button  Text="GetfavRequest"  Clicked="GetfavRequest" HorizontalOptions="Center" />
+            <Button  Text="GetContactListRequest"  Clicked="GetContactListRequest" HorizontalOptions="Center" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -18,8 +18,8 @@ namespace LinphoneXamarin.Services
 
         ContactService()
         {
-            allContacts.Add(new Contact("1", "Roi", "2007", ContactType.Aeonix));
-            allContacts.Add(new Contact("2", "Yuval", "2008", ContactType.Aeonix));
+            //allContacts.Add(new Contact("1", "Roi", "2007", ContactType.Aeonix));
+            //allContacts.Add(new Contact("2", "Yuval", "2008", ContactType.Aeonix));
 
             phoneContactsAsync();
         }
@@ -39,15 +39,32 @@ namespace LinphoneXamarin.Services
             }
         }
 
+        public void updateContact(Contact contact)
+        {
+            Contact result = allContacts.Find(delegate (Contact c)
+            {
+
+                return c.userName.Equals(contact.userName);
+            });
+            if (result == null)
+                allContacts.Add(contact);
+            else
+            {
+                result = contact;
+            }
+
+        }
+
         public Contact getContactByUserName(String userName)
         {
 
             return null;
         }
 
-        public Contact getContactByAlias(int alias)
+        public Contact getContactByAlias(string alias)
         {
-            return null;
+            Contact result = allContacts.Find(i => i.primaryAlias.Equals(alias));
+            return result;
         }
 
         public bool toggleContactFavStatus(string userName)

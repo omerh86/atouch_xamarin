@@ -37,28 +37,40 @@ namespace LinphoneXamarin.components
         {
             string strToSend = mySendRequestHelper.GetPictureRequest(new UserNameProp("AMIR_4002"));
             Console.WriteLine("omer40: " + strToSend);
-
+            AeonixInfoRepository.Instance.sendToInfoAeonix(strToSend);
         }
 
         private void NextResponseRequest(object sender, EventArgs e)
         {
             string strToSend = mySendRequestHelper.GetNextResponseRequest();
             Console.WriteLine("omer40: " + strToSend);
-
+            AeonixInfoRepository.Instance.sendToInfoAeonix(strToSend);
         }
 
         private void CreateAccountRequest(object sender, EventArgs e)
         {
             string strToSend = mySendRequestHelper.getCreateAccountRequest(new CreateAccountProp("ln", "pn", false, "111", true));
             Console.WriteLine("omer40: " + strToSend);
-
+            AeonixInfoRepository.Instance.sendToInfoAeonix(strToSend);
         }
 
         private void GetRsUserRequest(object sender, EventArgs e)
         {
             string strToSend = mySendRequestHelper.GetRsUserRequest(new UserNameProp("AMIR_4002"));
             Console.WriteLine("omer40: " + strToSend);
+            AeonixInfoRepository.Instance.sendToInfoAeonix(strToSend);
+        }
 
+        private void GetfavRequest(object sender, EventArgs e)
+        {
+            string strToSend = mySendRequestHelper.getFavoritesRequest(new UserNameProp("AMIR_4002"));
+            Console.WriteLine("omer40: " + strToSend);
+            AeonixInfoRepository.Instance.sendToInfoAeonix(strToSend);
+        }
+
+        private void GetContactListRequest(object sender, EventArgs e)
+        {
+            AeonixInfoService.Instance.GetServerContactsByName();
         }
     }
 }

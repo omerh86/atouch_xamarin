@@ -3,6 +3,9 @@ using LinphoneXamarin.Entities;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Linphone;
+using LinphoneXamarin.Util;
+using static LinphoneXamarin.Util.MySendRequestHelper;
+
 namespace LinphoneXamarin.Services
 {
     public sealed class AeonixInfoRepository
@@ -13,21 +16,23 @@ namespace LinphoneXamarin.Services
 
         private Core LinphoneCore;
         private CoreListener Listener;
+        MyInfoListener myInfoListener;
+
 
         private void OnInfoRecived(Core lc, Call call, InfoMessage msg)
         {
-            Console.WriteLine("omer40" + msg.ToString());
 
-        }
+            try
+            {
+                if (this.myInfoListener != null)
+                    this.myInfoListener.onInfoResponse(msg);
 
-        private void onNotifyReceived(Core lc, Object ev, string eventName, Object content)
-        {
-            Console.WriteLine("omer40" + eventName.ToString());
-        }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("omer40" + e);
+            }
 
-        private void globalState(Core lc, GlobalState state, String message)
-        {
-            Console.WriteLine("omer40" + message.ToString());
         }
 
 
@@ -36,8 +41,6 @@ namespace LinphoneXamarin.Services
             LinphoneCore = LinphoneBase.Instance.linphoneCore;
             Listener = LinphoneBase.Instance.coreListener;
             Listener.OnInfoReceived = OnInfoRecived;
-            Listener.OnNotifyReceived = onNotifyReceived;
-            Listener.OnGlobalStateChanged = globalState;
             LinphoneCore.AddListener(Listener);
         }
 
@@ -54,6 +57,11 @@ namespace LinphoneXamarin.Services
                     return instance;
                 }
             }
+        }
+
+        public void setInfoListener(MyInfoListener myInfoListener)
+        {
+            this.myInfoListener = myInfoListener;
         }
 
         public void sendToInfoAeonix(string info)

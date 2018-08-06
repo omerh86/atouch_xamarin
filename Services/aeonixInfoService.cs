@@ -3,18 +3,22 @@ using LinphoneXamarin.Entities;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Linphone;
+using LinphoneXamarin.Util;
+using static LinphoneXamarin.Util.MySendRequestHelper;
+
 namespace LinphoneXamarin.Services
 {
-    public sealed class AeonixInfoService
+    public sealed class AeonixInfoService : MyInfoListener
     {
 
         private static AeonixInfoService instance = null;
         private static readonly object padlock = new object();
+        MySendRequestHelper mySendRequestHelper;
 
-    
         AeonixInfoService()
         {
-          
+            mySendRequestHelper = MySendRequestHelper.Instance;
+            AeonixInfoRepository.Instance.setInfoListener(this);
         }
 
         public static AeonixInfoService Instance
@@ -32,6 +36,24 @@ namespace LinphoneXamarin.Services
             }
         }
 
+        public void GetServerContactsByName()
+        {
+            string strToSend = mySendRequestHelper.getContactListRequest(new ContactListProp(0, 20, "200"));
+            Console.WriteLine("omer40: " + strToSend);
+            AeonixInfoRepository.Instance.sendToInfoAeonix(strToSend);
+
+        }
+
+        public void onInfoResponse(InfoMessage info)
+        {
+            ContactlistRootobjectResponse contactlistRootobjectResponse = MySendRequestHelper.Instance.getServerContactListRootObject(info.Content.StringBuffer);
+            ContactService contactService = ContactService.Instance;
+            foreach (var c in contactlistRootobjectResponse.ContactListResponse.contactsPresence)
+            {
+                Entities.Contact myContact = new Entities.Contact(c.contact.userName, c.contact.displayName, c.contact.aliases[0].completeAliasName, ContactType.Aeonix);
+                contactService.updateContact(myContact);
+            }
+        }
 
         public class InfoProcess
 
@@ -69,7 +91,7 @@ namespace LinphoneXamarin.Services
                 transitions = new Dictionary<StateTransition, MyInfoProcessState>
             {
                 { new StateTransition(MyInfoProcessState.Before, MyInfoProcessCommands.StartAll), MyInfoProcessState.GetCallLog},
-               
+
             };
             }
 
@@ -88,7 +110,7 @@ namespace LinphoneXamarin.Services
                 CurrentState = GetNext(command);
                 if (this.MyRegistrationListener != null && previewState != CurrentState)
                 {
-                   // MyRegistrationListener.onMyRegistrationStateChanged(CurrentState);
+                    // MyRegistrationListener.onMyRegistrationStateChanged(CurrentState);
                 }
             }
         }

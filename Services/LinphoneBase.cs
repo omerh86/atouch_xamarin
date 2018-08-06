@@ -12,6 +12,7 @@ namespace LinphoneXamarin.Services
 
         public Core linphoneCore { get; set; }
         public CoreListener coreListener { get; set; }
+        public bool shoulIterate { get; set; }
         Thread iterateBackground;
         Thread iterateforground;
 

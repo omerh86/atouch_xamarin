@@ -11,7 +11,7 @@ namespace LinphoneXamarin.Services
     public sealed class CallLogService
     {
 
-        private List<MyCallLog> allCallsLog = new List<MyCallLog>();
+        private ObservableCollection<MyCallLog> allCallsLog = new ObservableCollection<MyCallLog>();
         private static CallLogService instance = null;
         private static readonly object padlock = new object();
 
@@ -20,6 +20,7 @@ namespace LinphoneXamarin.Services
             this.addCallsLog();
         }
 
+       
         public static CallLogService Instance
         {
             get
@@ -35,26 +36,40 @@ namespace LinphoneXamarin.Services
             }
         }
 
-        public List<MyCallLog> getCallsLog()
+        public ObservableCollection<MyCallLog> getCallsLog()
         {
+            this.addCallsLog();
             return allCallsLog;
         }
 
         public void addCallsLog()
         {
+            allCallsLog = new ObservableCollection<MyCallLog>();
             var x = new List<CallInfo>();
             x.Add(new CallInfo(CallDirection.Missed, 2121, 4345));
             x.Add(new CallInfo(CallDirection.OutGoing, 1212, 333));
-            allCallsLog.Add(new MyCallLog("2007", "1", "yuval", null, true, x));
-            allCallsLog.Add(new MyCallLog("2008", "2", "roi", null, false, x));
-            allCallsLog.Add(new MyCallLog("2008", "2", "roi", null, false, x));
-            allCallsLog.Add(new MyCallLog("2008", "2", "roi", null, false, x));
-            allCallsLog.Add(new MyCallLog("2008", "2", "roi", null, false, x));
-            allCallsLog.Add(new MyCallLog("2008", "2", "roi", null, false, x));
-            allCallsLog.Add(new MyCallLog("2008", "2", "roi", null, false, x));
-            allCallsLog.Add(new MyCallLog("2008", "2", "roi", null, false, x));
-            allCallsLog.Add(new MyCallLog("2008", "2", "roi", null, false, x));
+            doAddCallLogs("2007", x);
+            doAddCallLogs("2008", x);
+            doAddCallLogs("2009", x);
+            doAddCallLogs("2007", x);
+            doAddCallLogs("2008", x);
+            doAddCallLogs("2009", x);
+            doAddCallLogs("2007", x);
+            doAddCallLogs("2008", x);
+            doAddCallLogs("2009", x);
+        }
 
+        private void doAddCallLogs(string alias, List<CallInfo> callsInfo)
+        {
+            Contact contact = ContactService.Instance.getContactByAlias(alias);
+            if (contact != null)
+            {
+                allCallsLog.Add(new MyCallLog(contact.primaryAlias, contact.userName, contact.displayName, null, contact.isFav, callsInfo));
+            }
+            else
+            {
+                allCallsLog.Add(new MyCallLog(alias, "", "Unknown", null, false, callsInfo));
+            }
         }
 
 

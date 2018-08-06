@@ -42,4 +42,9 @@ namespace LinphoneXamarin.Entities
         void onDestroyCallView();
     }
 
+    public interface MyInfoListener
+    {
+        void onInfoResponse(InfoMessage infoMessage);
+       }
+
 }

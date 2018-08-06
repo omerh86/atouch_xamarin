@@ -17,6 +17,8 @@ namespace LinphoneXamarin.Services
         public bool isMute = false;
         public bool isPaused = false;
         public bool isConferenced = false;
+        public bool pendingcallView = false;
+
         public Call tr87Call;
 
         private static CallService instance = null;
@@ -25,14 +27,14 @@ namespace LinphoneXamarin.Services
         private Tr87stateListener tr87StateListener;
         private CallViewInitiater callViewInitiater;
 
-       
+
         private bool isCallStateReallyChanged = false;
 
-        
+
         private Core LinphoneCore;
         private CoreListener Listener;
 
-      
+
 
         private void OnCall(Core lc, Call lcall, CallState state, string message)
         {
@@ -76,10 +78,14 @@ namespace LinphoneXamarin.Services
 
         private void callViewInitiaterHandler(CallState state)
         {
+            pendingcallView = false;
             if (callViewInitiater != null)
             {
+
                 if (LinphoneCore.CallsNb > 0)
+                {
                     callViewInitiater.onInitiateCallView();
+                }
                 else
                 {
                     callViewInitiater.onDestroyCallView();
@@ -87,8 +93,11 @@ namespace LinphoneXamarin.Services
                 }
 
             }
-
-
+            else
+            {
+                if (LinphoneCore.CallsNb > 0)
+                    pendingcallView = true;
+            }
         }
 
         private void setCurrentCall()
@@ -217,10 +226,11 @@ namespace LinphoneXamarin.Services
             CallParams cp = LinphoneCore.CreateCallParams(null);
             cp.AddCustomHeader("Content-Disposition", "signal;handling=required");
             cp.AddCustomHeader("TR87-Mode", "true");
-          //  cp.AddCustomHeader("User-Agent", "Tadiran ATouch PC/1.0.201 (belle-sip/1.6.3)");
-            cp.AddCustomHeader("User-Agent", "Tadiran ATouch Android/1.0.201 (belle-sip/1.6.3)");
+            cp.AddCustomHeader("User-Agent", "Tadiran ATouch PC/1.0.201 (belle-sip/1.6.3)");
+            // cp.AddCustomHeader("User-Agent", "Tadiran ATouch Android/1.0.201 (belle-sip/1.6.3)");
             //proxyConfig.SetCustomHeader("User-Agent", "Tadiran ATouch Android/1.0.201 (belle-sip/1.6.3)");
             LinphoneCore.InviteAddressWithParams(addr, cp);
+            //LinphoneCore.Subscribe(addr, "Tr87Subscription", 3600, null);
         }
 
 

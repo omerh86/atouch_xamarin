@@ -1,16 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Linphone;
 
 namespace LinphoneXamarin.Entities
 {
-    public class MyCallLog
+    public class MyCallLog : INotifyPropertyChanged
     {
         public string alias { set; get; }
         public string userName { set; get; }
         public string displayName { set; get; }
         public string img { set; get; }
-        public bool isFav { set; get; }
+        bool _IsFav;
+        public bool isFav
+        {
+            get { return _IsFav; }
+            set
+            {
+                _IsFav = value;
+                NotifyPropertyChanged("isFav");
+            }
+        }
+
         public List<CallInfo> callsInfo { set; get; }
 
 
@@ -24,5 +35,11 @@ namespace LinphoneXamarin.Entities
             this.displayName = displayName;
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void NotifyPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }

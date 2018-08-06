@@ -14,6 +14,7 @@ namespace LinphoneXamarin.components
             this.BindingContext = phoneNumber;
         }
 
+      
         private void onDialPadClicked(object sender, EventArgs e)
         {
             Button btn = (Button)sender;

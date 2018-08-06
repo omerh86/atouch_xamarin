@@ -87,7 +87,7 @@ namespace LinphoneXamarin.components.userControllers
         {
 
 
-            if (filter.Length < 4)
+            if (filter.Length < 3)
             {
                 contactList = new List<Contact>();
                 this.BindingContext = contactList;
